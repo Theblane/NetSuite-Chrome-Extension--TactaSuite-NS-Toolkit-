@@ -1,0 +1,75 @@
+/**
+ * environment-badge.css
+ * NetSuite TactaSuite - Environment Badge (Styles)
+ *
+ * @author Blane Maher
+ *
+ * Injected into the DOCUMENT HEAD (styles the NetSuite header itself), so it
+ * must be listed in router.js globalStyles. The pill color comes from the
+ * --tacta-env-color custom property set inline by environment-badge.js,
+ * which honours account-color overrides from storage.
+ */
+
+.tacta-env-badge {
+    --tacta-env-color: #76c043;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    box-sizing: border-box;
+    margin: 0 8px 0 6px;
+    padding: 2px 9px;
+    border-radius: var(--tacta-radius-full, 999px);
+    background: var(--tacta-env-color);
+    color: #fff;
+    font-family: var(--tacta-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.tacta-env-badge:hover {
+    filter: brightness(1.1);
+}
+
+/* Production gets a slow pulse so it is hard to miss */
+.tacta-env-badge--prod {
+    animation: tacta-env-badge-pulse 2.4s ease-in-out infinite;
+}
+
+.tacta-env-badge-label {
+    font-weight: 800;
+}
+
+.tacta-env-badge-sep,
+.tacta-env-badge-account {
+    font-weight: 600;
+    opacity: 0.92;
+}
+
+/* Inline variant inside NetSuite's header */
+.tacta-env-badge--inline {
+    align-self: center;
+}
+
+/* Fixed fallback when no header anchor exists */
+.tacta-env-badge--fixed {
+    position: fixed;
+    top: 7px;
+    right: 10px;
+    left: auto;
+    z-index: 2147483000;
+    margin: 0;
+}
+
+@keyframes tacta-env-badge-pulse {
+    0%, 100% { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
+    50% { box-shadow: 0 0 0 4px rgba(255, 68, 68, 0.25); }
+}

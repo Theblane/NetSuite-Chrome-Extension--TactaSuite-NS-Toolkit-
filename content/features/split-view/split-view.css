@@ -1,0 +1,92 @@
+/**
+ * split-view.css
+ * NetSuite TactaSuite - Split View Styles
+ *
+ * @author Blane Maher
+ *
+ * Minimal styles for the floating "Exit Split" button and the toast
+ * notification. Uses CSS custom properties from shared/theme-vars.css.
+ */
+
+/* ── Floating Exit Split Button ────────────────────────────────────── */
+
+.tacta-split-exit-btn {
+    position: fixed;
+    bottom: var(--tacta-space-lg);
+    right: var(--tacta-space-lg);
+    z-index: var(--tacta-z-toast);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tacta-space-xs);
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+
+    background: var(--tacta-bg);
+    color: var(--tacta-accent);
+    border: 1px solid var(--tacta-accent);
+    border-radius: var(--tacta-radius-md);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+
+    box-shadow: var(--tacta-shadow-md), var(--tacta-shadow-glow);
+    transition: background var(--tacta-transition-fast),
+                color var(--tacta-transition-fast),
+                border-color var(--tacta-transition-fast),
+                box-shadow var(--tacta-transition-fast);
+}
+
+.tacta-split-exit-btn:hover {
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    border-color: var(--tacta-accent-hover);
+    box-shadow: var(--tacta-shadow-lg), var(--tacta-shadow-glow);
+}
+
+.tacta-split-exit-btn:active {
+    background: var(--tacta-accent-active);
+    border-color: var(--tacta-accent-active);
+}
+
+.tacta-split-exit-btn svg {
+    flex-shrink: 0;
+}
+
+/* ── Toast Notification ────────────────────────────────────────────── */
+
+.tacta-split-toast {
+    position: fixed;
+    bottom: calc(var(--tacta-space-lg) + 44px);  /* Above the exit button */
+    right: var(--tacta-space-lg);
+    z-index: var(--tacta-z-toast);
+
+    max-width: 380px;
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text-secondary);
+    border: 1px solid var(--tacta-border);
+    border-left: 3px solid var(--tacta-accent);
+    border-radius: var(--tacta-radius-md);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-sm);
+    line-height: var(--tacta-line-height);
+
+    box-shadow: var(--tacta-shadow-md);
+
+    /* Entrance/exit animation */
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--tacta-transition-normal),
+                transform var(--tacta-transition-normal);
+    pointer-events: none;
+}
+
+.tacta-split-toast--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}

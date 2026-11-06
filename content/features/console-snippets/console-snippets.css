@@ -1,0 +1,268 @@
+/**
+ * console-snippets.css
+ * NetSuite TactaSuite - Console Snippets Panel Styles
+ *
+ * @author Blane Maher
+ *
+ * All rules are scoped under .tacta-snip to avoid collisions.
+ * Injected into the Shadow Root via TactaDOM.injectStylesheet().
+ */
+
+/* ── Panel body layout ─────────────────────────────────────────── */
+
+.tacta-snip {
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md, 13px);
+}
+
+/* ── Loading / error states ────────────────────────────────────── */
+
+.tacta-snip-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    color: var(--tacta-text-muted, #888);
+    font-size: 12px;
+}
+
+.tacta-snip-error {
+    padding: 10px 12px;
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ── Production warning ────────────────────────────────────────── */
+
+.tacta-snip-prod {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 8px;
+    padding: 7px 10px;
+    background: rgba(231, 76, 60, 0.14);
+    border: 1px solid var(--tacta-error, #e74c3c);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+}
+
+.tacta-snip-prod strong {
+    font-weight: 700;
+}
+
+/* ── Context strip ─────────────────────────────────────────────── */
+
+.tacta-snip-ctx {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--tacta-border, #333);
+}
+
+.tacta-snip-ctx-type {
+    padding: 2px 8px;
+    background: var(--tacta-accent-muted, rgba(118, 192, 67, 0.15));
+    border-radius: var(--tacta-radius-full, 999px);
+    color: var(--tacta-accent, #76c043);
+    font-family: var(--tacta-font-mono, monospace);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.tacta-snip-ctx-id,
+.tacta-snip-ctx-none {
+    color: var(--tacta-text-muted, #888);
+    font-size: 11px;
+}
+
+/* ── Hint + search ─────────────────────────────────────────────── */
+
+.tacta-snip-hint {
+    padding: 8px 0 10px;
+    color: var(--tacta-text-muted, #888);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.tacta-snip-search {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* ── Sections ──────────────────────────────────────────────────── */
+
+.tacta-snip-section {
+    margin-bottom: 12px;
+}
+
+.tacta-snip-section-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0 6px;
+    color: var(--tacta-text-secondary, #bbb);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.tacta-snip-section-head:hover {
+    color: var(--tacta-accent, #76c043);
+}
+
+.tacta-snip-count {
+    padding: 0 5px;
+    background: var(--tacta-bg-active, #2a2a2a);
+    border-radius: var(--tacta-radius-full, 999px);
+    color: var(--tacta-text-muted, #888);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.tacta-snip-section--collapsed .tacta-snip-section-body {
+    display: none;
+}
+
+/* ── Snippet card ──────────────────────────────────────────────── */
+
+.tacta-snip-card {
+    margin-bottom: 6px;
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: var(--tacta-radius-md, 6px);
+    overflow: hidden;
+}
+
+.tacta-snip-card:hover {
+    border-color: var(--tacta-border-light, #444);
+}
+
+.tacta-snip-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.tacta-snip-head:hover {
+    background: var(--tacta-bg-hover, #282828);
+}
+
+.tacta-snip-caret {
+    flex-shrink: 0;
+    width: 10px;
+    padding-top: 1px;
+    color: var(--tacta-text-muted, #888);
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.tacta-snip-head-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.tacta-snip-title-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tacta-snip-title {
+    color: var(--tacta-text, #eee);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.tacta-snip-desc {
+    margin-top: 2px;
+    color: var(--tacta-text-muted, #888);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.tacta-snip-copy {
+    flex-shrink: 0;
+}
+
+/* ── Kind badges ───────────────────────────────────────────────── */
+
+.tacta-snip-badge {
+    padding: 1px 6px;
+    border-radius: var(--tacta-radius-sm, 3px);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.tacta-snip-badge--read {
+    background: rgba(52, 152, 219, 0.16);
+    color: var(--tacta-info, #3498db);
+}
+
+.tacta-snip-badge--query {
+    background: rgba(118, 192, 67, 0.16);
+    color: var(--tacta-accent, #76c043);
+}
+
+.tacta-snip-badge--form {
+    background: rgba(243, 156, 18, 0.16);
+    color: var(--tacta-warning, #f39c12);
+}
+
+.tacta-snip-badge--write {
+    background: rgba(243, 156, 18, 0.22);
+    color: var(--tacta-warning, #f39c12);
+}
+
+.tacta-snip-badge--danger {
+    background: rgba(231, 76, 60, 0.2);
+    color: var(--tacta-error, #e74c3c);
+}
+
+/* ── Code block ────────────────────────────────────────────────── */
+
+.tacta-snip-code {
+    display: none;
+    margin: 0;
+    padding: 10px;
+    background: var(--tacta-bg, #1a1a1a);
+    border-top: 1px solid var(--tacta-border, #333);
+    color: var(--tacta-text-secondary, #bbb);
+    font-family: var(--tacta-font-mono, 'Consolas', 'Menlo', monospace);
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.tacta-snip-open .tacta-snip-code {
+    display: block;
+}
+
+/* ── Empty state ───────────────────────────────────────────────── */
+
+.tacta-snip-empty {
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px dashed var(--tacta-border, #333);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-text-muted, #888);
+    font-size: 11px;
+}

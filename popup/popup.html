@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TactaSuite NS Toolkit</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- ── Header ─────────────────────────────────────────────────── -->
+    <header class="tacta-header">
+        <div class="tacta-header-left">
+            <div class="tacta-logo">
+                <span class="tacta-logo-mark">T</span>
+                <span class="tacta-logo-text">TactaSuite</span>
+            </div>
+            <div class="tacta-env" id="envIndicator">
+                <span class="tacta-env-dot" id="envDot"></span>
+                <span class="tacta-env-label" id="envLabel">Detecting...</span>
+            </div>
+        </div>
+        <div class="tacta-header-right">
+            <button class="tacta-meeting-toggle" id="meetingToggle" title="Meeting Mode - hides all visual modifications">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M1 3.5h10v7H1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
+                    <path d="M11 5.5l4-2v7l-4-2" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <span class="tacta-meeting-label">Meeting</span>
+            </button>
+            <button class="tacta-gear-btn" id="settingsToggle" title="Settings" aria-expanded="false" aria-controls="settingsPanel">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M3.4 12.6l1.3-1.3M11.3 4.7l1.3-1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    <circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.3"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ── Update notice (shown once after an update) ─────────────── -->
+    <section class="tacta-update-notice" id="updateNotice" hidden>
+        <span class="tacta-update-text" id="updateNoticeText">Updated.</span>
+        <button type="button" class="tacta-settings-btn tacta-settings-btn-primary" id="updateNoticeTour">See what's new</button>
+        <button type="button" class="tacta-update-dismiss" id="updateNoticeDismiss" title="Dismiss" aria-label="Dismiss">&#10005;</button>
+    </section>
+
+    <!-- ── User type (top of window) ──────────────────────────────── -->
+    <section class="tacta-usertype-bar">
+        <div class="tacta-usertype-top">
+            <span class="tacta-usertype-label">I am a</span>
+            <div class="tacta-segmented" id="userTypeSegment" role="radiogroup" aria-label="User type">
+                <button type="button" class="tacta-segment" data-user-type="user" role="radio" aria-checked="false">User</button>
+                <button type="button" class="tacta-segment" data-user-type="developer" role="radio" aria-checked="false">Developer</button>
+                <button type="button" class="tacta-segment" data-user-type="custom" role="radio" aria-checked="false" disabled title="Set automatically when your feature toggles differ from both presets">Custom</button>
+            </div>
+        </div>
+        <span class="tacta-usertype-hint" id="userTypeHint">User is the default. Developer turns on every tool. Changing any toggle switches you to Custom.</span>
+        <span class="tacta-usertype-hint">Prefer a guided tour? <a href="#" class="tacta-settings-link" id="runWalkthroughLink">Run the setup walkthrough</a>.</span>
+    </section>
+
+    <!-- ── Settings panel (gear) ──────────────────────────────────── -->
+    <section class="tacta-settings-panel" id="settingsPanel" hidden>
+        <div class="tacta-settings-row">
+            <span class="tacta-settings-label">Theme</span>
+            <div class="tacta-segmented" id="themeSegment" role="radiogroup" aria-label="Color scheme">
+                <button type="button" class="tacta-segment" data-scheme="light" role="radio" aria-checked="false">Light</button>
+                <button type="button" class="tacta-segment" data-scheme="dark" role="radio" aria-checked="false">Dark</button>
+                <button type="button" class="tacta-segment" data-scheme="contrast" role="radio" aria-checked="false">Contrast</button>
+            </div>
+            <label class="tacta-settings-inline" for="accentColor">
+                <span>Accent</span>
+                <input type="color" id="accentColor" value="#76c043">
+            </label>
+        </div>
+        <div class="tacta-settings-row tacta-settings-row-toggle">
+            <div class="tacta-feature-info">
+                <span class="tacta-feature-name">Click outside a panel to close it</span>
+            </div>
+            <label class="tacta-toggle">
+                <input type="checkbox" id="closeOnClickOutside">
+                <span class="tacta-toggle-track"></span>
+            </label>
+        </div>
+        <div class="tacta-settings-actions">
+            <button type="button" class="tacta-settings-btn" id="exportSettingsBtn" title="Save your feature toggles, theme and preferences as a JSON file to back up or share. Import it from All settings.">Export settings</button>
+            <button type="button" class="tacta-settings-btn" id="feedbackBtn" data-tacta-feedback="bug" title="Report a problem or suggest an idea">Send feedback</button>
+            <button type="button" class="tacta-settings-btn tacta-settings-btn-primary" id="allSettingsBtn">All settings</button>
+        </div>
+    </section>
+
+    <!-- ── Quick Actions ──────────────────────────────────────────── -->
+    <section class="tacta-section">
+        <h2 class="tacta-section-title">Quick Actions</h2>
+        <div class="tacta-quick-actions" id="quickActions">
+            <button class="tacta-action-btn" data-action="field-explorer" title="Field Explorer">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.4"/>
+                    <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M7 9h4M9 7v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                <span>Fields</span>
+            </button>
+            <button class="tacta-action-btn" data-action="record-object" title="Record Object Viewer">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 3h12v14H4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M7 7h6M7 10h4M7 13h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                <span>Record</span>
+            </button>
+            <button class="tacta-action-btn" data-action="script-explorer" title="Script Explorer">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M6 4l-4 5 4 5M14 4l4 5-4 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 3L8 17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                <span>Scripts</span>
+            </button>
+            <button class="tacta-action-btn" data-action="suiteql-runner" title="SuiteQL Runner">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 4h14v12H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M6 8l2 2-2 2M10 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>SuiteQL</span>
+            </button>
+            <button class="tacta-action-btn" data-action="screenshot-studio" title="Screenshot Studio">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 6.5A1.5 1.5 0 014.5 5H7l1.2-1.6h3.6L13 5h2.5A1.5 1.5 0 0117 6.5v8a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 14.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <circle cx="10" cy="10.5" r="2.8" stroke="currentColor" stroke-width="1.3"/>
+                </svg>
+                <span>Shot</span>
+            </button>
+            <button class="tacta-action-btn" data-action="csv-template-generator" title="CSV Template Generator">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M3 4h14v5H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M3 9v7h7V9" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                    <path d="M14 11v5m0 0l-2-2m2 2l2-2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Template</span>
+            </button>
+            <button class="tacta-action-btn" data-action="audit-trail" title="Audit Trail">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="1.4"/>
+                    <path d="M10 6.5V10l2.5 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Audit</span>
+            </button>
+            <button class="tacta-action-btn" data-action="search-url-builder" title="Search URL Builder">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M11 6l1.5-1.5a3 3 0 014.2 4.2L15 10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M9 14l-1.5 1.5a3 3 0 01-4.2-4.2L5 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M7.5 12.5l5-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                <span>URL</span>
+            </button>
+            <button class="tacta-action-btn" data-action="script-content-search" title="Script Content Search">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 3h8l4 4v10H4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <circle cx="9.5" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M11.5 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+                <span>Code</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ── Active Features ────────────────────────────────────────── -->
+    <section class="tacta-section" id="activeFeaturesSection">
+        <h2 class="tacta-section-title">
+            Active on This Page
+            <span class="tacta-active-count" id="activeCount">0</span>
+        </h2>
+        <div class="tacta-active-features" id="activeFeatures">
+            <p class="tacta-empty-state">No features active on this page</p>
+        </div>
+    </section>
+
+    <!-- ── Feature Toggles ────────────────────────────────────────── -->
+    <section class="tacta-section tacta-section-toggles">
+        <h2 class="tacta-section-title">Features</h2>
+        <div class="tacta-feature-groups" id="featureGroups"></div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────────────── -->
+    <footer class="tacta-footer">
+        <span class="tacta-version">v1.7.0</span>
+        <a href="#" class="tacta-options-link" id="optionsLink">Options</a>
+        <span class="tacta-brand" id="authorMount">TactaSuite</span>
+    </footer>
+
+    <script src="../shared/theme-manager.js"></script>
+    <script src="../shared/author-links.js"></script>
+    <script src="../shared/feedback.js"></script>
+    <script src="../shared/user-types.js"></script>
+    <script src="../shared/settings-export.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

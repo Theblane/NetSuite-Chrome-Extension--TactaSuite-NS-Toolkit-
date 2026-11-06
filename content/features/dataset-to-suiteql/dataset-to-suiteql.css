@@ -1,0 +1,149 @@
+/**
+ * dataset-to-suiteql.css
+ * NetSuite TactaSuite - Dataset to SuiteQL (Styles)
+ *
+ * @author Blane Maher
+ *
+ * Injected into the DOCUMENT HEAD by the router (the toolbar button sits in
+ * the NetSuite page), so it must be listed in router.js globalStyles. The
+ * content script also injects this same file into the toolkit shadow root so
+ * the panel body rules below apply there too.
+ */
+
+/* ── Toolbar button (NetSuite page) ────────────────────────────── */
+
+.tacta-ds-toolbar-btn {
+    box-sizing: border-box;
+    margin: 6px 0 6px 8px;
+    padding: 4px 12px;
+    border: 1px solid var(--tacta-accent, #76c043);
+    border-radius: var(--tacta-radius-md, 6px);
+    background: var(--tacta-bg, #1a1a1a);
+    color: var(--tacta-accent, #76c043);
+    font-family: var(--tacta-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--tacta-transition-fast, 120ms), color var(--tacta-transition-fast, 120ms);
+}
+
+.tacta-ds-toolbar-btn:hover,
+.tacta-ds-toolbar-btn:focus-visible {
+    background: var(--tacta-accent, #76c043);
+    color: var(--tacta-text-inverse, #111);
+    outline: none;
+}
+
+.tacta-ds-toolbar-btn--inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tacta-ds-toolbar-btn--fixed {
+    position: fixed;
+    top: 70px;
+    right: 16px;
+    z-index: 2147483000;
+    margin: 0;
+    box-shadow: var(--tacta-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* ── Panel body (toolkit shadow root) ──────────────────────────── */
+
+.tacta-ds-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 4px;
+    color: var(--tacta-text-secondary, #bbb);
+    font-size: var(--tacta-font-size-sm, 12px);
+}
+
+.tacta-ds-meta {
+    margin: 0 0 8px 0;
+    font-size: var(--tacta-font-size-sm, 12px);
+    color: var(--tacta-text-secondary, #bbb);
+}
+
+.tacta-ds-meta-id {
+    padding: 1px 6px;
+    border-radius: var(--tacta-radius-sm, 4px);
+    background: var(--tacta-bg-elevated, #232323);
+    color: var(--tacta-accent, #76c043);
+    font-family: var(--tacta-font-mono, ui-monospace, Consolas, monospace);
+    font-size: 11px;
+}
+
+.tacta-ds-note {
+    margin: 0 0 8px 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--tacta-info, #4488ff);
+    background: var(--tacta-info-bg, rgba(68, 136, 255, 0.12));
+    color: var(--tacta-text, #e6e6e6);
+    font-size: var(--tacta-font-size-sm, 12px);
+    line-height: 1.4;
+}
+
+.tacta-ds-error {
+    margin: 0 0 8px 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--tacta-error, #ff4444);
+    background: var(--tacta-error-bg, rgba(255, 68, 68, 0.12));
+    color: var(--tacta-text, #e6e6e6);
+    font-size: var(--tacta-font-size-sm, 12px);
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.tacta-ds-sql {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: var(--tacta-font-mono, ui-monospace, Consolas, monospace);
+    font-size: 12px;
+    line-height: 1.45;
+    white-space: pre;
+    overflow: auto;
+}
+
+.tacta-ds-params {
+    margin: 6px 0 0 0;
+    color: var(--tacta-text-muted, #999);
+    font-family: var(--tacta-font-mono, ui-monospace, Consolas, monospace);
+    font-size: 11px;
+    word-break: break-word;
+}
+
+.tacta-ds-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 0 0;
+}
+
+.tacta-ds-manual {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 0 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--tacta-border, #333);
+}
+
+.tacta-ds-manual-label {
+    color: var(--tacta-text-secondary, #bbb);
+    font-size: var(--tacta-font-size-sm, 12px);
+}
+
+.tacta-ds-manual-input {
+    flex: 1 1 200px;
+    min-width: 160px;
+    font-family: var(--tacta-font-mono, ui-monospace, Consolas, monospace);
+    font-size: 12px;
+}

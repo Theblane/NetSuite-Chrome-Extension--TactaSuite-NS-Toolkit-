@@ -1,0 +1,138 @@
+/**
+ * field-finder.css
+ * NetSuite TactaSuite - Field Finder Styles
+ *
+ * @author Blane Maher
+ *
+ * Styles for the enhanced dropdown filter UI on Saved Search pages.
+ * Injected into the page alongside the NS dropdown elements.
+ */
+
+/* Container at top of dropdown */
+.tacta-ff-container {
+    padding: 6px 8px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Search input */
+.tacta-ff-input {
+    width: 100%;
+    padding: 5px 8px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.tacta-ff-input:focus {
+    border-color: #76c043;
+    box-shadow: 0 0 0 2px rgba(118, 192, 67, 0.2);
+}
+
+/* Filter button group */
+.tacta-ff-btn-group {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.tacta-ff-btn {
+    padding: 2px 8px;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    background: #fff;
+    color: #555;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tacta-ff-btn:hover {
+    background: #e8e8e8;
+    border-color: #999;
+}
+
+.tacta-ff-btn-active {
+    background: #76c043;
+    color: #fff;
+    border-color: #5a9e30;
+}
+
+.tacta-ff-btn-active:hover {
+    background: #68ad3a;
+}
+
+/* Status text */
+.tacta-ff-status {
+    font-size: 10px;
+    color: #888;
+    text-align: right;
+}
+
+/* Option columns */
+.tacta-ff-option-row {
+    box-sizing: border-box;
+}
+
+.tacta-ff-col {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 4px;
+    box-sizing: border-box;
+}
+
+.tacta-ff-col-name {
+    width: 320px;
+    font-weight: 500;
+}
+
+.tacta-ff-col-id {
+    width: 260px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    color: #2a6496;
+    cursor: pointer;
+}
+
+/* ID overlay — positioned absolutely so it's outside the option's click target */
+.tacta-ff-col-id:hover {
+    text-decoration: underline;
+    color: #76c043;
+    background: rgba(118, 192, 67, 0.1);
+}
+
+.tacta-ff-col-id.tacta-ff-copied {
+    color: #76c043 !important;
+    background: rgba(118, 192, 67, 0.15);
+}
+
+.tacta-ff-col-id.tacta-ff-copied::after {
+    content: ' \2713';
+    color: #76c043;
+    font-weight: bold;
+}
+
+.tacta-ff-col-type {
+    width: 130px;
+    font-size: 10px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Search highlight */
+mark.tacta-ff-highlight {
+    background: #fff3b0;
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+}

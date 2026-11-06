@@ -1,0 +1,115 @@
+/**
+ * search-url-builder.css
+ * NetSuite TactaSuite - Search URL Builder Panel Styles
+ *
+ * @author Blane Maher
+ */
+
+.tacta-sub {
+    font-family: var(--tacta-font-family);
+}
+
+/* ── Error ──────────────────────────────────────────────────────── */
+
+.tacta-sub-error {
+    padding: 10px 12px;
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ── Info header ────────────────────────────────────────────────── */
+
+.tacta-sub-info {
+    margin-bottom: 12px;
+}
+
+.tacta-sub-info-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tacta-text, #fff);
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.tacta-sub-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tacta-sub-meta-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--tacta-radius-full, 9999px);
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    color: var(--tacta-text-secondary, #ccc);
+}
+
+.tacta-sub-meta-pill--script {
+    background: rgba(118, 192, 67, 0.12);
+    border-color: rgba(118, 192, 67, 0.35);
+    color: var(--tacta-accent, #76c043);
+}
+
+/* ── Snippet cards ──────────────────────────────────────────────── */
+
+.tacta-sub-card {
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: var(--tacta-radius-md, 6px);
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.tacta-sub-card-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--tacta-text-muted, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 10px 4px;
+    border-bottom: 1px solid var(--tacta-border, #333);
+}
+
+.tacta-sub-code {
+    display: block;
+    font-family: var(--tacta-font-mono, monospace);
+    font-size: 11px;
+    line-height: 1.55;
+    color: var(--tacta-text-secondary, #ccc);
+    padding: 8px 10px;
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+    background: transparent;
+    border: none;
+    /* Subtle syntax hint for URLs */
+    word-break: break-all;
+}
+
+.tacta-sub-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px 7px;
+    gap: 8px;
+}
+
+.tacta-sub-card-note {
+    font-size: 10px;
+    color: var(--tacta-text-muted, #888);
+    line-height: 1.4;
+    flex: 1;
+}
+
+.tacta-sub-copy-btn {
+    flex-shrink: 0;
+}

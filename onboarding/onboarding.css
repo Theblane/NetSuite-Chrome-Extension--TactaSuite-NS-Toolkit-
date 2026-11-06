@@ -1,0 +1,930 @@
+/**
+ * onboarding.css
+ * NetSuite TactaSuite - Onboarding Walkthrough Stylesheet
+ *
+ * @author Blane Maher
+ *
+ * Loads after shared/theme-vars.css. Only --tacta-* variables are used for
+ * color so TactaThemeManager can switch Light / Dark / High Contrast live.
+ * The :root block below overrides the shared dark defaults with the Light
+ * scheme so the page is light until the manager applies a stored theme.
+ */
+
+/* Light-scheme fallbacks (same values as TactaThemeManager.SCHEMES.light) */
+:root {
+    --tacta-bg:              #f7f8fa;
+    --tacta-bg-elevated:     #ffffff;
+    --tacta-bg-hover:        #eef1f4;
+    --tacta-bg-active:       #e4e8ed;
+    --tacta-bg-overlay:      rgba(15, 23, 42, 0.35);
+    --tacta-text:            #17202a;
+    --tacta-text-secondary:  #3d4854;
+    --tacta-text-muted:      #66717d;
+    --tacta-text-inverse:    #ffffff;
+    --tacta-border:          #d7dde4;
+    --tacta-border-light:    #c3ccd6;
+}
+
+
+/* Reset and base */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background: var(--tacta-bg);
+    color: var(--tacta-text);
+    font-family: var(--tacta-font-family);
+    font-size: 14px;
+    line-height: var(--tacta-line-height);
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--tacta-transition-normal), color var(--tacta-transition-normal);
+}
+
+button {
+    font-family: inherit;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* Page column (left-aligned, no centering) */
+
+.tacta-ob {
+    max-width: 820px;
+    padding: 0 var(--tacta-space-xl) var(--tacta-space-xxxl);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* Header */
+
+.tacta-ob-header {
+    display: flex;
+    align-items: center;
+    padding: var(--tacta-space-xxl) 0 var(--tacta-space-xl);
+    border-bottom: 1px solid var(--tacta-border);
+    margin-bottom: var(--tacta-space-xl);
+}
+
+.tacta-ob-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tacta-ob-logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    font-weight: 800;
+    font-size: 24px;
+    border-radius: var(--tacta-radius-lg);
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+}
+
+.tacta-ob-logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tacta-ob-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--tacta-text);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.tacta-ob-subtitle {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-version {
+    font-family: var(--tacta-font-mono);
+    margin-left: var(--tacta-space-xs);
+}
+
+
+/* Progress indicator */
+
+.tacta-ob-progress {
+    margin-bottom: var(--tacta-space-xl);
+}
+
+.tacta-ob-progress-meta {
+    display: flex;
+    align-items: baseline;
+    gap: var(--tacta-space-md);
+    margin-bottom: var(--tacta-space-sm);
+}
+
+.tacta-ob-progress-counter {
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-progress-label {
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-progress-track {
+    height: 6px;
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-full);
+    overflow: hidden;
+}
+
+.tacta-ob-progress-fill {
+    height: 100%;
+    width: 0;
+    background: var(--tacta-accent);
+    border-radius: var(--tacta-radius-full);
+    transition: width var(--tacta-transition-slide);
+}
+
+.tacta-ob-milestones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tacta-space-xs) var(--tacta-space-lg);
+    list-style: none;
+    margin-top: var(--tacta-space-sm);
+}
+
+.tacta-ob-milestone {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-xs);
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-milestone::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tacta-border-light);
+    flex-shrink: 0;
+}
+
+.tacta-ob-milestone.is-done::before,
+.tacta-ob-milestone.is-current::before {
+    background: var(--tacta-accent);
+}
+
+.tacta-ob-milestone.is-current {
+    color: var(--tacta-text);
+    font-weight: 600;
+}
+
+
+/* Step body */
+
+.tacta-ob-main {
+    flex: 1;
+}
+
+.tacta-ob-step {
+    animation: tacta-ob-fade var(--tacta-transition-normal);
+}
+
+@keyframes tacta-ob-fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.tacta-ob-step-title {
+    font-size: var(--tacta-font-size-xxl);
+    font-weight: 700;
+    color: var(--tacta-text);
+    letter-spacing: -0.4px;
+    margin-bottom: var(--tacta-space-sm);
+}
+
+.tacta-ob-step-desc {
+    font-size: var(--tacta-font-size-lg);
+    color: var(--tacta-text-secondary);
+    margin-bottom: var(--tacta-space-xl);
+    max-width: 640px;
+}
+
+.tacta-ob-note {
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text-muted);
+    padding: var(--tacta-space-md) var(--tacta-space-lg);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-left: 3px solid var(--tacta-accent);
+    border-radius: var(--tacta-radius-md);
+}
+
+
+/* Welcome */
+
+.tacta-ob-welcome-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin-bottom: var(--tacta-space-lg);
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    font-weight: 800;
+    font-size: 40px;
+    border-radius: var(--tacta-radius-xl);
+    letter-spacing: -1px;
+    box-shadow: var(--tacta-shadow-glow);
+}
+
+.tacta-ob-welcome-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-welcome-list li::before {
+    content: "-";
+    color: var(--tacta-accent);
+    font-weight: 700;
+    margin-right: var(--tacta-space-sm);
+}
+
+
+/* User type cards */
+
+.tacta-ob-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: var(--tacta-space-lg);
+}
+
+.tacta-ob-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-xl) var(--tacta-space-lg);
+    text-align: left;
+    background: var(--tacta-bg-elevated);
+    border: 2px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-xl);
+    color: var(--tacta-text);
+    cursor: pointer;
+    transition: all var(--tacta-transition-normal);
+}
+
+.tacta-ob-card:hover {
+    border-color: var(--tacta-border-light);
+    background: var(--tacta-bg-hover);
+    transform: translateY(-1px);
+}
+
+.tacta-ob-card:focus-visible {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+.tacta-ob-card[aria-pressed="true"] {
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+    box-shadow: var(--tacta-shadow-glow);
+}
+
+.tacta-ob-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--tacta-radius-lg);
+    background: var(--tacta-bg-active);
+    color: var(--tacta-text-secondary);
+    font-weight: 700;
+    font-size: var(--tacta-font-size-lg);
+}
+
+.tacta-ob-card[aria-pressed="true"] .tacta-ob-card-icon {
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+}
+
+.tacta-ob-card-title {
+    font-size: var(--tacta-font-size-xl);
+    font-weight: 700;
+}
+
+.tacta-ob-card-tagline {
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-card-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-xs);
+    margin-top: var(--tacta-space-xs);
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-card-bullets li::before {
+    content: "+";
+    color: var(--tacta-accent);
+    font-weight: 700;
+    margin-right: var(--tacta-space-sm);
+}
+
+.tacta-ob-card-check {
+    align-self: flex-end;
+    margin-top: auto;
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    color: var(--tacta-accent);
+    visibility: hidden;
+}
+
+.tacta-ob-card[aria-pressed="true"] .tacta-ob-card-check {
+    visibility: visible;
+}
+
+
+/* Feature cards (mirrors .tacta-opt-feature-card) */
+
+.tacta-ob-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-ob-feature-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tacta-space-lg);
+    padding: 14px 16px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    transition: all var(--tacta-transition-normal);
+}
+
+.tacta-ob-feature-card:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-ob-feature-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-xs);
+    min-width: 0;
+    flex: 1;
+}
+
+.tacta-ob-feature-top {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    flex-wrap: wrap;
+}
+
+.tacta-ob-feature-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-ob-feature-desc {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-feature-summary {
+    font-size: 13px;
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-feature-where {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-feature-where::before {
+    content: "Where: ";
+    font-weight: 600;
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--tacta-radius-full);
+    white-space: nowrap;
+    background: var(--tacta-bg-active);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-badge-auto {
+    background: var(--tacta-accent-muted);
+    color: var(--tacta-accent);
+}
+
+.tacta-ob-badge-popup {
+    background: var(--tacta-info-bg);
+    color: var(--tacta-info);
+}
+
+.tacta-ob-badge-contextmenu {
+    background: var(--tacta-warning-bg);
+    color: var(--tacta-warning);
+}
+
+
+/* Toggle switch (copied from .tacta-opt-toggle) */
+
+.tacta-ob-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.tacta-ob-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.tacta-ob-toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-full);
+    cursor: pointer;
+    transition: background var(--tacta-transition-normal);
+    border: 1px solid var(--tacta-border);
+}
+
+.tacta-ob-toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background: var(--tacta-text-muted);
+    border-radius: 50%;
+    transition: transform var(--tacta-transition-normal),
+                background var(--tacta-transition-normal),
+                box-shadow var(--tacta-transition-normal);
+}
+
+.tacta-ob-toggle input:checked + .tacta-ob-toggle-track {
+    background: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+}
+
+.tacta-ob-toggle input:checked + .tacta-ob-toggle-track::after {
+    transform: translateX(20px);
+    background: var(--tacta-text-inverse);
+    box-shadow: var(--tacta-shadow-sm);
+}
+
+.tacta-ob-toggle input:focus-visible + .tacta-ob-toggle-track {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+
+/* Appearance form (mirrors .tacta-opt-settings-form) */
+
+.tacta-ob-form {
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    overflow: hidden;
+}
+
+.tacta-ob-form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tacta-space-lg);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-ob-form-row:last-child {
+    border-bottom: none;
+}
+
+.tacta-ob-form-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.tacta-ob-form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-ob-form-hint {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-radio-group {
+    display: flex;
+    gap: var(--tacta-space-sm);
+    flex-wrap: wrap;
+}
+
+.tacta-ob-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: 8px 14px;
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    color: var(--tacta-text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--tacta-transition-fast);
+}
+
+.tacta-ob-radio:hover {
+    border-color: var(--tacta-border-light);
+    color: var(--tacta-text);
+}
+
+.tacta-ob-radio input {
+    accent-color: var(--tacta-accent);
+    margin: 0;
+}
+
+.tacta-ob-radio.is-checked {
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+    color: var(--tacta-text);
+}
+
+.tacta-ob-radio input:focus-visible {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+.tacta-ob-color-input {
+    width: 48px;
+    height: 36px;
+    padding: 2px;
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+}
+
+.tacta-ob-color-input::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.tacta-ob-color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+.tacta-ob-color-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-ob-color-value {
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-md);
+    flex-wrap: wrap;
+    margin-top: var(--tacta-space-lg);
+    padding: var(--tacta-space-lg);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+}
+
+.tacta-ob-preview-title {
+    width: 100%;
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tacta-text-muted);
+}
+
+
+/* Summary (final step) */
+
+.tacta-ob-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--tacta-space-lg);
+    margin-bottom: var(--tacta-space-xl);
+}
+
+.tacta-ob-summary-tile {
+    padding: var(--tacta-space-lg);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+}
+
+.tacta-ob-summary-label {
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tacta-text-muted);
+    margin-bottom: var(--tacta-space-xs);
+}
+
+.tacta-ob-summary-value {
+    font-size: var(--tacta-font-size-xxl);
+    font-weight: 700;
+    color: var(--tacta-text);
+}
+
+.tacta-ob-summary-sub {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-actions {
+    display: flex;
+    gap: var(--tacta-space-sm);
+    flex-wrap: wrap;
+}
+
+
+/* Buttons (mirrors .tacta-opt-btn) */
+
+.tacta-ob-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: var(--tacta-radius-md);
+    border: 1px solid var(--tacta-border);
+    cursor: pointer;
+    transition: all var(--tacta-transition-normal);
+    white-space: nowrap;
+}
+
+.tacta-ob-btn:focus-visible {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+.tacta-ob-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.tacta-ob-btn-primary {
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    border-color: var(--tacta-accent);
+}
+
+.tacta-ob-btn-primary:hover:not(:disabled) {
+    background: var(--tacta-accent-hover);
+    border-color: var(--tacta-accent-hover);
+    box-shadow: var(--tacta-shadow-glow);
+}
+
+.tacta-ob-btn-primary:active:not(:disabled) {
+    background: var(--tacta-accent-active);
+    border-color: var(--tacta-accent-active);
+}
+
+.tacta-ob-btn-secondary {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-ob-btn-secondary:hover:not(:disabled) {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+    color: var(--tacta-text);
+}
+
+.tacta-ob-btn-link {
+    background: transparent;
+    border-color: transparent;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-ob-btn-link:hover:not(:disabled) {
+    color: var(--tacta-accent);
+    text-decoration: underline;
+}
+
+
+/* Footer navigation */
+
+.tacta-ob-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tacta-space-md);
+    padding-top: var(--tacta-space-xl);
+    margin-top: var(--tacta-space-xxl);
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-ob-footer-left,
+.tacta-ob-footer-right {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+}
+
+
+/* Toast */
+
+.tacta-ob-toast {
+    position: fixed;
+    left: var(--tacta-space-xl);
+    bottom: var(--tacta-space-xl);
+    max-width: 420px;
+    padding: 10px 14px;
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text);
+    border: 1px solid var(--tacta-border);
+    border-left: 3px solid var(--tacta-accent);
+    border-radius: var(--tacta-radius-md);
+    box-shadow: var(--tacta-shadow-md);
+    font-size: 13px;
+    z-index: var(--tacta-z-toast);
+}
+
+.tacta-ob-toast.is-error {
+    border-left-color: var(--tacta-error);
+}
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--tacta-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+}
+
+
+/* Responsive */
+
+@media (max-width: 640px) {
+    .tacta-ob {
+        padding: 0 var(--tacta-space-lg) var(--tacta-space-xxl);
+    }
+
+    .tacta-ob-feature-card,
+    .tacta-ob-form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tacta-ob-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tacta-ob-footer-right {
+        justify-content: flex-start;
+    }
+}
+
+/* ── Author / support links (shared/author-links.js) ───────────── */
+
+.tacta-author-name {
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-author-prefix {
+    font-weight: 400;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-role {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.tacta-author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    text-decoration: none;
+}
+
+.tacta-author-link:hover {
+    color: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+}
+
+.tacta-author--compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-author--compact .tacta-author-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author--compact .tacta-author-links {
+    margin-top: 0;
+    gap: 4px;
+}
+
+.tacta-author--compact .tacta-author-link {
+    padding: 3px;
+    border-radius: var(--tacta-radius-sm);
+}
+
+.tacta-ob-credit {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--tacta-border);
+}

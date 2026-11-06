@@ -1,0 +1,958 @@
+/**
+ * popup.css
+ * NetSuite TactaSuite — Popup Stylesheet
+ *
+ * @author Blane Maher
+ *
+ * Self-contained dark theme. Mirrors shared/theme-vars.css custom properties
+ * so the popup renders correctly in its own context.
+ */
+
+/* ── CSS Custom Properties (popup-local) ──────────────────────────── */
+
+:root {
+    --tacta-bg:              #f7f8fa;
+    --tacta-bg-elevated:     #ffffff;
+    --tacta-bg-hover:        #eef1f4;
+    --tacta-bg-active:       #e4e8ed;
+
+    --tacta-accent:          #76c043;
+    --tacta-accent-hover:    #8ad454;
+    --tacta-accent-active:   #65a738;
+    --tacta-accent-muted:    rgba(118, 192, 67, 0.15);
+
+    --tacta-text:            #17202a;
+    --tacta-text-secondary:  #3d4854;
+    --tacta-text-muted:      #66717d;
+    --tacta-text-inverse:    #ffffff;
+
+    --tacta-border:          #d7dde4;
+    --tacta-border-light:    #c3ccd6;
+    --tacta-border-focus:    #76c043;
+
+    --tacta-success:         #76c043;
+    --tacta-error:           #e74c3c;
+    --tacta-warning:         #f39c12;
+    --tacta-info:            #3498db;
+
+    --tacta-radius-sm:       4px;
+    --tacta-radius-md:       6px;
+    --tacta-radius-lg:       8px;
+    --tacta-radius-xl:       12px;
+    --tacta-radius-full:     9999px;
+
+    --tacta-font-family:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                             Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --tacta-font-mono:       "SF Mono", "Cascadia Code", "Fira Code", Consolas,
+                             "Courier New", monospace;
+
+    --tacta-shadow-sm:       0 1px 3px rgba(0, 0, 0, 0.3);
+    --tacta-shadow-md:       0 4px 12px rgba(0, 0, 0, 0.4);
+    --tacta-shadow-glow:     0 0 12px rgba(118, 192, 67, 0.3);
+
+    --tacta-transition-fast:    120ms ease;
+    --tacta-transition-normal:  200ms ease;
+    --tacta-transition-slow:    350ms ease;
+}
+
+
+/* ── Reset & Base ─────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 380px;
+    min-height: 200px;
+    max-height: 580px;
+    overflow-y: auto;
+    background: var(--tacta-bg);
+    color: var(--tacta-text);
+    font-family: var(--tacta-font-family);
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--tacta-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--tacta-text-muted);
+}
+
+
+/* ── Header ───────────────────────────────────────────────────────── */
+
+.tacta-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+    background: var(--tacta-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tacta-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tacta-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    font-weight: 800;
+    font-size: 16px;
+    border-radius: var(--tacta-radius-md);
+    letter-spacing: -0.5px;
+}
+
+.tacta-logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tacta-text);
+    letter-spacing: -0.3px;
+}
+
+.tacta-env {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px 2px 6px;
+    background: var(--tacta-bg-elevated);
+    border-radius: var(--tacta-radius-full);
+    border: 1px solid var(--tacta-border);
+}
+
+.tacta-env-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tacta-text-muted);
+    flex-shrink: 0;
+}
+
+.tacta-env-dot.production {
+    background: var(--tacta-error);
+    box-shadow: 0 0 6px rgba(231, 76, 60, 0.6);
+    animation: pulse-red 2s ease-in-out infinite;
+}
+
+.tacta-env-dot.sandbox {
+    background: var(--tacta-success);
+    box-shadow: 0 0 6px rgba(118, 192, 67, 0.4);
+}
+
+@keyframes pulse-red {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(231, 76, 60, 0.6); }
+    50%      { opacity: 0.7; box-shadow: 0 0 10px rgba(231, 76, 60, 0.9); }
+}
+
+.tacta-env-label {
+    font-size: 11px;
+    color: var(--tacta-text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* ── User Type Select ────────────────────────────────────────────── */
+
+.tacta-user-type-select {
+    padding: 4px 24px 4px 8px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    color: var(--tacta-text-secondary);
+    font-family: var(--tacta-font-family);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    transition: all var(--tacta-transition-fast);
+}
+
+.tacta-user-type-select:hover {
+    border-color: var(--tacta-border-light);
+    color: var(--tacta-text);
+}
+
+.tacta-user-type-select:focus {
+    border-color: var(--tacta-accent);
+}
+
+.tacta-user-type-select option {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text);
+}
+
+.tacta-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* ── Meeting Mode Toggle ──────────────────────────────────────────── */
+
+.tacta-meeting-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    color: var(--tacta-text-muted);
+    cursor: pointer;
+    font-size: 11px;
+    font-family: var(--tacta-font-family);
+    transition: all var(--tacta-transition-normal);
+}
+
+.tacta-meeting-toggle:hover {
+    background: var(--tacta-bg-hover);
+    color: var(--tacta-text-secondary);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-meeting-toggle.active {
+    background: var(--tacta-error);
+    border-color: var(--tacta-error);
+    color: var(--tacta-text);
+}
+
+.tacta-meeting-toggle.active:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+}
+
+.tacta-meeting-label {
+    font-weight: 500;
+}
+
+
+/* ── Sections ─────────────────────────────────────────────────────── */
+
+.tacta-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-section-toggles {
+    padding-bottom: 8px;
+}
+
+.tacta-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tacta-text-muted);
+    margin-bottom: 10px;
+}
+
+
+/* ── Quick Actions Grid ───────────────────────────────────────────── */
+
+.tacta-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.tacta-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 4px 10px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    color: var(--tacta-text-secondary);
+    cursor: pointer;
+    font-family: var(--tacta-font-family);
+    font-size: 11px;
+    font-weight: 500;
+    transition: all var(--tacta-transition-normal);
+}
+
+.tacta-action-btn:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+    box-shadow: var(--tacta-shadow-glow);
+    transform: translateY(-1px);
+}
+
+.tacta-action-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.tacta-action-btn:disabled,
+.tacta-action-btn.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.tacta-action-btn svg {
+    flex-shrink: 0;
+}
+
+
+/* ── Active Features ──────────────────────────────────────────────── */
+
+.tacta-active-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--tacta-accent-muted);
+    color: var(--tacta-accent);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: var(--tacta-radius-full);
+}
+
+.tacta-active-features {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tacta-active-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    background: var(--tacta-bg-elevated);
+    border-radius: var(--tacta-radius-sm);
+    font-size: 12px;
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tacta-accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 4px rgba(118, 192, 67, 0.5);
+}
+
+.tacta-empty-state {
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+    text-align: center;
+    padding: 8px 0;
+    font-style: italic;
+}
+
+
+/* ── Feature Groups ───────────────────────────────────────────────── */
+
+.tacta-feature-group {
+    margin-bottom: 4px;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    overflow: hidden;
+}
+
+.tacta-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--tacta-bg-elevated);
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--tacta-transition-fast);
+}
+
+.tacta-group-header:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-group-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-group-arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--tacta-text-muted);
+    transition: transform var(--tacta-transition-normal);
+    flex-shrink: 0;
+}
+
+.tacta-group-header.expanded .tacta-group-arrow {
+    transform: rotate(90deg);
+}
+
+.tacta-group-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-group-count {
+    font-size: 11px;
+    color: var(--tacta-text-muted);
+    font-weight: 400;
+}
+
+.tacta-group-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--tacta-transition-slow);
+}
+
+.tacta-group-body.expanded {
+    max-height: 600px;
+}
+
+.tacta-group-items {
+    padding: 4px 0;
+}
+
+
+/* ── Feature Toggle Row ───────────────────────────────────────────── */
+
+.tacta-feature-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px 6px 36px;
+    transition: background var(--tacta-transition-fast);
+}
+
+.tacta-feature-row:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-feature-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+    margin-right: 12px;
+}
+
+.tacta-feature-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--tacta-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-feature-desc {
+    font-size: 11px;
+    color: var(--tacta-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-feature-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+
+/* ── Per-Row Launch Button ────────────────────────────────────────── */
+
+.tacta-feature-launch {
+    padding: 3px 9px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    color: var(--tacta-text-secondary);
+    cursor: pointer;
+    font-family: var(--tacta-font-family);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    transition: all var(--tacta-transition-fast);
+}
+
+.tacta-feature-launch:hover {
+    background: var(--tacta-accent-muted);
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+}
+
+.tacta-feature-launch:disabled,
+.tacta-feature-launch.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.tacta-feature-launch:focus-visible {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+
+/* ── Toggle Switch ────────────────────────────────────────────────── */
+
+.tacta-toggle {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.tacta-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.tacta-toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-full);
+    cursor: pointer;
+    transition: background var(--tacta-transition-normal);
+}
+
+.tacta-toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--tacta-text-muted);
+    border-radius: 50%;
+    transition: transform var(--tacta-transition-normal), background var(--tacta-transition-normal);
+}
+
+.tacta-toggle input:checked + .tacta-toggle-track {
+    background: var(--tacta-accent);
+}
+
+.tacta-toggle input:checked + .tacta-toggle-track::after {
+    transform: translateX(16px);
+    background: var(--tacta-text);
+}
+
+.tacta-toggle input:focus-visible + .tacta-toggle-track {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+
+/* ── Meeting Mode Overlay ─────────────────────────────────────────── */
+
+body.meeting-mode .tacta-quick-actions,
+body.meeting-mode .tacta-feature-groups {
+    opacity: 0.35;
+    pointer-events: none;
+    filter: grayscale(1);
+}
+
+body.meeting-mode .tacta-active-features {
+    opacity: 0.35;
+}
+
+
+/* ── Footer ───────────────────────────────────────────────────────── */
+
+.tacta-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-top: 1px solid var(--tacta-border);
+    background: var(--tacta-bg);
+    position: sticky;
+    bottom: 0;
+}
+
+.tacta-version {
+    font-size: 11px;
+    color: var(--tacta-text-muted);
+    font-family: var(--tacta-font-mono);
+}
+
+.tacta-options-link {
+    font-size: 11px;
+    color: var(--tacta-accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--tacta-transition-fast);
+}
+
+.tacta-options-link:hover {
+    color: var(--tacta-accent-hover);
+    text-decoration: underline;
+}
+
+.tacta-brand {
+    font-size: 11px;
+    color: var(--tacta-text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+
+/* ── Gear button + settings panel ─────────────────────────────── */
+
+.tacta-gear-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-left: 6px;
+    color: var(--tacta-text-secondary);
+    background: transparent;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+    transition: color var(--tacta-transition-fast), border-color var(--tacta-transition-fast), background var(--tacta-transition-fast);
+}
+
+.tacta-gear-btn:hover,
+.tacta-gear-btn.active {
+    color: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+}
+
+.tacta-settings-panel {
+    padding: 10px 14px 12px;
+    background: var(--tacta-bg-elevated);
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-settings-panel[hidden] {
+    display: none;
+}
+
+.tacta-settings-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+}
+
+.tacta-settings-row-toggle {
+    justify-content: space-between;
+}
+
+.tacta-settings-label {
+    min-width: 48px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tacta-settings-hint {
+    flex-basis: 100%;
+    font-size: 10.5px;
+    color: var(--tacta-text-muted);
+}
+
+/* ── User type bar (top of the main window) ────────────────────── */
+.tacta-usertype-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+    background: var(--tacta-bg-elevated);
+}
+
+.tacta-usertype-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-basis: 100%;
+}
+
+.tacta-usertype-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tacta-usertype-bar .tacta-segmented {
+    flex: 1;
+}
+
+.tacta-usertype-bar .tacta-segment {
+    flex: 1;
+    text-align: center;
+}
+
+.tacta-usertype-hint {
+    flex-basis: 100%;
+    font-size: 10.5px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-segmented {
+    display: inline-flex;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    overflow: hidden;
+}
+
+.tacta-segment {
+    padding: 4px 10px;
+    font-size: 11.5px;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg);
+    border: none;
+    border-right: 1px solid var(--tacta-border);
+    cursor: pointer;
+}
+
+.tacta-segment:last-child {
+    border-right: none;
+}
+
+.tacta-segment:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-segment.active {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+}
+
+/* "Custom" is a state, not a choice: shown, never clickable. */
+.tacta-segment[disabled] {
+    cursor: default;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-segment[disabled]:hover {
+    background: var(--tacta-bg);
+}
+
+.tacta-segment.active[disabled] {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+}
+
+.tacta-settings-link {
+    color: var(--tacta-accent);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tacta-settings-link:hover {
+    color: var(--tacta-accent-hover);
+}
+
+.tacta-settings-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-settings-inline input[type="color"] {
+    width: 26px;
+    height: 22px;
+    padding: 0;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-sm);
+    background: transparent;
+    cursor: pointer;
+}
+
+.tacta-settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+}
+
+.tacta-settings-btn {
+    padding: 5px 10px;
+    font-size: 11.5px;
+    color: var(--tacta-text);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+}
+
+.tacta-settings-btn:hover {
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+}
+
+.tacta-settings-btn-primary {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+}
+
+.tacta-settings-btn-primary:hover {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent-hover);
+}
+
+/* ── Author / support links (shared/author-links.js) ───────────── */
+
+.tacta-author-name {
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-author-prefix {
+    font-weight: 400;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-role {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.tacta-author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    text-decoration: none;
+}
+
+.tacta-author-link:hover {
+    color: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+}
+
+.tacta-author--compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-author--compact .tacta-author-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author--compact .tacta-author-links {
+    margin-top: 0;
+    gap: 4px;
+}
+
+.tacta-author--compact .tacta-author-link {
+    padding: 3px;
+    border-radius: var(--tacta-radius-sm);
+}
+
+/* ── Update notice ─────────────────────────────────────────────── */
+
+.tacta-update-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    color: var(--tacta-text);
+    background: var(--tacta-accent-muted);
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-update-notice[hidden] {
+    display: none;
+}
+
+.tacta-update-text {
+    flex: 1;
+}
+
+.tacta-update-dismiss {
+    padding: 2px 6px;
+    color: var(--tacta-text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.tacta-update-dismiss:hover {
+    color: var(--tacta-text);
+}

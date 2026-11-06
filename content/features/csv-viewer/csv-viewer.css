@@ -1,0 +1,346 @@
+/**
+ * csv-viewer.css
+ * NetSuite TactaSuite — CSV Viewer Styles
+ *
+ * @author Blane Maher
+ *
+ * Styles the CSV preview panel that appears on NetSuite CSV import pages.
+ * Uses CSS custom properties from theme-vars.css.
+ *
+ * Scoped via .tacta-csv-* class prefix to avoid collisions with
+ * NetSuite native styles or other extensions.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   CONTAINER
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-container {
+    margin-top: var(--tacta-space-lg, 16px);
+    border: 1px solid var(--tacta-border, #333333);
+    border-radius: var(--tacta-radius-lg, 8px);
+    background: var(--tacta-bg, #1a1a1a);
+    box-shadow: var(--tacta-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.4));
+    font-family: var(--tacta-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   HEADER BAR (title + badge + collapse toggle)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-header {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm, 8px);
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+    background: var(--tacta-bg-elevated, #222222);
+    border-bottom: 1px solid var(--tacta-border, #333333);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.tacta-csv-header:hover {
+    background: var(--tacta-bg-hover, #2a2a2a);
+}
+
+.tacta-csv-title {
+    font-size: var(--tacta-font-size-md, 13px);
+    font-weight: 600;
+    color: var(--tacta-accent, #76c043);
+    flex-shrink: 0;
+}
+
+.tacta-csv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--tacta-space-xxs, 2px) var(--tacta-space-sm, 8px);
+    background: var(--tacta-accent-muted, rgba(118, 192, 67, 0.15));
+    color: var(--tacta-accent, #76c043);
+    border-radius: var(--tacta-radius-full, 9999px);
+    font-size: var(--tacta-font-size-xs, 11px);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tacta-csv-filename {
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-muted, #888888);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
+.tacta-csv-toggle {
+    margin-left: auto;
+    font-size: var(--tacta-font-size-sm, 12px);
+    color: var(--tacta-text-muted, #888888);
+    transition: transform var(--tacta-transition-fast, 120ms ease);
+    flex-shrink: 0;
+}
+
+.tacta-csv-container.tacta-csv-collapsed .tacta-csv-toggle {
+    transform: rotate(-90deg);
+}
+
+.tacta-csv-container.tacta-csv-collapsed .tacta-csv-body {
+    display: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOOLBAR (search + encoding + delimiter controls)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm, 8px);
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+    background: var(--tacta-bg-elevated, #222222);
+    border-bottom: 1px solid var(--tacta-border, #333333);
+    flex-wrap: wrap;
+}
+
+.tacta-csv-search {
+    flex: 1;
+    min-width: 180px;
+    max-width: 320px;
+    padding: var(--tacta-space-xs, 4px) var(--tacta-space-sm, 8px);
+    background: var(--tacta-bg, #1a1a1a);
+    border: 1px solid var(--tacta-border, #333333);
+    border-radius: var(--tacta-radius-sm, 4px);
+    color: var(--tacta-text, #ffffff);
+    font-family: var(--tacta-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: var(--tacta-font-size-sm, 12px);
+    outline: none;
+    transition: border-color var(--tacta-transition-fast, 120ms ease);
+}
+
+.tacta-csv-search::placeholder {
+    color: var(--tacta-text-muted, #888888);
+}
+
+.tacta-csv-search:focus {
+    border-color: var(--tacta-border-focus, #76c043);
+}
+
+.tacta-csv-match-count {
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-muted, #888888);
+    white-space: nowrap;
+}
+
+.tacta-csv-select {
+    padding: var(--tacta-space-xxs, 2px) var(--tacta-space-xs, 4px);
+    background: var(--tacta-bg, #1a1a1a);
+    border: 1px solid var(--tacta-border, #333333);
+    border-radius: var(--tacta-radius-sm, 4px);
+    color: var(--tacta-text-secondary, #cccccc);
+    font-size: var(--tacta-font-size-xs, 11px);
+    cursor: pointer;
+    outline: none;
+}
+
+.tacta-csv-select:focus {
+    border-color: var(--tacta-border-focus, #76c043);
+}
+
+.tacta-csv-label {
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-muted, #888888);
+    white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TABLE WRAPPER
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-table-wrap {
+    max-height: 520px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--tacta-border-light, #444444) var(--tacta-bg, #1a1a1a);
+}
+
+.tacta-csv-table-wrap::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.tacta-csv-table-wrap::-webkit-scrollbar-track {
+    background: var(--tacta-bg, #1a1a1a);
+}
+
+.tacta-csv-table-wrap::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light, #444444);
+    border-radius: var(--tacta-radius-full, 9999px);
+}
+
+.tacta-csv-table-wrap::-webkit-scrollbar-thumb:hover {
+    background: var(--tacta-text-muted, #888888);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TABLE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    font-family: var(--tacta-font-mono, "SF Mono", "Cascadia Code", Consolas, monospace);
+    font-size: var(--tacta-font-size-xs, 11px);
+    line-height: var(--tacta-line-height, 1.5);
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+
+.tacta-csv-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.tacta-csv-table thead th {
+    padding: var(--tacta-space-xs, 4px) var(--tacta-space-sm, 8px);
+    background: var(--tacta-bg-active, #333333);
+    color: var(--tacta-accent, #76c043);
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--tacta-accent, #76c043);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.tacta-csv-table thead th.tacta-csv-rownum {
+    width: 40px;
+    min-width: 40px;
+    text-align: center;
+    color: var(--tacta-text-muted, #888888);
+    border-right: 1px solid var(--tacta-border, #333333);
+}
+
+/* ── Body Rows ───────────────────────────────────────────────────── */
+
+.tacta-csv-table tbody tr {
+    transition: background var(--tacta-transition-fast, 120ms ease);
+}
+
+.tacta-csv-table tbody tr:nth-child(odd) {
+    background: var(--tacta-bg, #1a1a1a);
+}
+
+.tacta-csv-table tbody tr:nth-child(even) {
+    background: var(--tacta-bg-elevated, #222222);
+}
+
+.tacta-csv-table tbody tr:hover {
+    background: var(--tacta-bg-hover, #2a2a2a);
+}
+
+.tacta-csv-table tbody td {
+    padding: var(--tacta-space-xxs, 2px) var(--tacta-space-sm, 8px);
+    color: var(--tacta-text, #ffffff);
+    border-bottom: 1px solid var(--tacta-border, #333333);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.tacta-csv-table tbody td.tacta-csv-rownum {
+    text-align: center;
+    color: var(--tacta-text-muted, #888888);
+    border-right: 1px solid var(--tacta-border, #333333);
+    font-size: var(--tacta-font-size-xs, 11px);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ── Search highlight ────────────────────────────────────────────── */
+
+.tacta-csv-table tbody tr.tacta-csv-row-hidden {
+    display: none;
+}
+
+.tacta-csv-highlight {
+    background: var(--tacta-warning-bg, rgba(243, 156, 18, 0.12));
+    color: var(--tacta-warning, #f39c12);
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PREVIEW BUTTON (injected next to file input)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-preview-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tacta-space-xs, 4px);
+    margin-left: var(--tacta-space-sm, 8px);
+    padding: var(--tacta-space-xs, 4px) var(--tacta-space-md, 12px);
+    background: var(--tacta-accent, #76c043);
+    color: var(--tacta-text-inverse, #1a1a1a);
+    border: none;
+    border-radius: var(--tacta-radius-sm, 4px);
+    font-family: var(--tacta-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: var(--tacta-font-size-sm, 12px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--tacta-transition-fast, 120ms ease);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.tacta-csv-preview-btn:hover {
+    background: var(--tacta-accent-hover, #8ad454);
+}
+
+.tacta-csv-preview-btn:active {
+    background: var(--tacta-accent-active, #65a738);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--tacta-space-xs, 4px) var(--tacta-space-md, 12px);
+    background: var(--tacta-bg-elevated, #222222);
+    border-top: 1px solid var(--tacta-border, #333333);
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-muted, #888888);
+}
+
+.tacta-csv-footer-info {
+    display: flex;
+    gap: var(--tacta-space-md, 12px);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   EMPTY / ERROR STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-csv-empty {
+    padding: var(--tacta-space-xl, 24px);
+    text-align: center;
+    color: var(--tacta-text-muted, #888888);
+    font-size: var(--tacta-font-size-sm, 12px);
+}
+
+.tacta-csv-error {
+    padding: var(--tacta-space-md, 12px);
+    background: var(--tacta-error-bg, rgba(231, 76, 60, 0.12));
+    color: var(--tacta-error, #e74c3c);
+    font-size: var(--tacta-font-size-sm, 12px);
+    border-radius: var(--tacta-radius-sm, 4px);
+    margin: var(--tacta-space-sm, 8px);
+}

@@ -1,0 +1,806 @@
+/**
+ * tactasuite-ui.css
+ * NetSuite TactaSuite - Shared UI Component Styles
+ *
+ * @author Blane Maher
+ *
+ * All rules are scoped under .tacta-toolkit to avoid collisions
+ * with NetSuite's own styles. Requires theme-vars.css to be loaded first.
+ */
+
+/* ── Base Reset (scoped) ────────────────────────────────────────── */
+
+.tacta-toolkit,
+.tacta-toolkit *,
+.tacta-toolkit *::before,
+.tacta-toolkit *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.tacta-toolkit {
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md);
+    line-height: var(--tacta-line-height);
+    color: var(--tacta-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   BUTTONS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-sm) var(--tacta-space-lg);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--tacta-text);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background var(--tacta-transition-fast),
+                border-color var(--tacta-transition-fast),
+                box-shadow var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-btn:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-toolkit .tacta-btn:active {
+    background: var(--tacta-bg-active);
+}
+
+.tacta-toolkit .tacta-btn:focus-visible {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+.tacta-toolkit .tacta-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Primary Button */
+.tacta-toolkit .tacta-btn-primary {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+    font-weight: 600;
+}
+
+.tacta-toolkit .tacta-btn-primary:hover {
+    background: var(--tacta-accent-hover);
+    border-color: var(--tacta-accent-hover);
+}
+
+.tacta-toolkit .tacta-btn-primary:active {
+    background: var(--tacta-accent-active);
+    border-color: var(--tacta-accent-active);
+}
+
+/* Small Button */
+.tacta-toolkit .tacta-btn-sm {
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-sm);
+}
+
+/* Icon Button */
+.tacta-toolkit .tacta-btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: var(--tacta-radius-md);
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-btn-icon.tacta-btn-sm {
+    width: 26px;
+    height: 26px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   INPUTS & SELECTS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-input,
+.tacta-toolkit .tacta-select {
+    display: block;
+    width: 100%;
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md);
+    color: var(--tacta-text);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    outline: none;
+    transition: border-color var(--tacta-transition-fast),
+                box-shadow var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-input:hover,
+.tacta-toolkit .tacta-select:hover {
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-toolkit .tacta-input:focus,
+.tacta-toolkit .tacta-select:focus {
+    border-color: var(--tacta-accent);
+    box-shadow: 0 0 0 3px var(--tacta-accent-muted);
+}
+
+.tacta-toolkit .tacta-input::placeholder {
+    color: var(--tacta-text-muted);
+}
+
+.tacta-toolkit .tacta-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23cccccc' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+.tacta-toolkit .tacta-select option {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PANELS (floating)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-panel {
+    position: fixed;
+    z-index: var(--tacta-z-panel);
+    display: flex;
+    flex-direction: column;
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    box-shadow: var(--tacta-shadow-lg);
+    overflow: hidden;
+}
+
+.tacta-toolkit .tacta-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    background: var(--tacta-bg-elevated);
+    border-bottom: 1px solid var(--tacta-border);
+    cursor: move;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-panel-title {
+    font-size: var(--tacta-font-size-md);
+    font-weight: 600;
+    color: var(--tacta-text);
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-toolkit .tacta-panel-title .tacta-accent-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tacta-accent);
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-xs);
+}
+
+.tacta-toolkit .tacta-panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: var(--tacta-radius-sm);
+    color: var(--tacta-text-muted);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background var(--tacta-transition-fast),
+                color var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-panel-close:hover {
+    background: var(--tacta-bg-active);
+    color: var(--tacta-text);
+}
+
+.tacta-toolkit .tacta-panel-body {
+    flex: 1;
+    overflow: auto;
+    padding: var(--tacta-space-md);
+}
+
+.tacta-toolkit .tacta-panel--resizable {
+    min-width: 280px;
+    min-height: 200px;
+}
+
+/* Custom bottom-left resize handle */
+.tacta-toolkit .tacta-panel-resize-handle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    cursor: sw-resize;
+    z-index: 5;
+}
+
+.tacta-toolkit .tacta-panel-resize-handle::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid var(--tacta-text-muted);
+    border-bottom: 2px solid var(--tacta-text-muted);
+    opacity: 0.5;
+    transition: opacity var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-panel-resize-handle:hover::after {
+    opacity: 1;
+    border-color: var(--tacta-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MODALS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--tacta-z-modal);
+    background: var(--tacta-bg-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--tacta-transition-normal);
+}
+
+.tacta-toolkit .tacta-modal-overlay.tacta-visible {
+    opacity: 1;
+}
+
+.tacta-toolkit .tacta-modal {
+    position: relative;
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    box-shadow: var(--tacta-shadow-xl);
+    transform: translateY(16px) scale(0.97);
+    transition: transform var(--tacta-transition-slide),
+                opacity var(--tacta-transition-normal);
+    opacity: 0;
+}
+
+.tacta-toolkit .tacta-modal-overlay.tacta-visible .tacta-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.tacta-toolkit .tacta-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--tacta-space-lg);
+    border-bottom: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-modal-title {
+    font-size: var(--tacta-font-size-lg);
+    font-weight: 600;
+}
+
+.tacta-toolkit .tacta-modal-body {
+    flex: 1;
+    overflow: auto;
+    padding: var(--tacta-space-lg);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-toolkit .tacta-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-md) var(--tacta-space-lg);
+    border-top: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TABS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--tacta-border);
+    gap: var(--tacta-space-xs);
+    overflow-x: auto;
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-tab {
+    position: relative;
+    padding: var(--tacta-space-sm) var(--tacta-space-lg);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md);
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--tacta-transition-fast),
+                border-color var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-tab:hover {
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-toolkit .tacta-tab.tacta-active {
+    color: var(--tacta-accent);
+    border-bottom-color: var(--tacta-accent);
+}
+
+.tacta-toolkit .tacta-tab-content {
+    display: none;
+}
+
+.tacta-toolkit .tacta-tab-content.tacta-active {
+    display: block;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TABLES
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-table-wrapper {
+    overflow: auto;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+}
+
+.tacta-toolkit .tacta-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--tacta-font-size-sm);
+}
+
+.tacta-toolkit .tacta-table th,
+.tacta-toolkit .tacta-table td {
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    text-align: left;
+    border-bottom: 1px solid var(--tacta-border);
+    white-space: nowrap;
+}
+
+.tacta-toolkit .tacta-table th {
+    position: sticky;
+    top: 0;
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text-secondary);
+    font-weight: 600;
+    font-size: var(--tacta-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    user-select: none;
+}
+
+.tacta-toolkit .tacta-table th.tacta-sortable {
+    cursor: pointer;
+    transition: background var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-table th.tacta-sortable:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-toolkit .tacta-table th.tacta-sortable::after {
+    content: "";
+    display: inline-block;
+    margin-left: var(--tacta-space-xs);
+    opacity: 0.3;
+    font-size: 10px;
+}
+
+.tacta-toolkit .tacta-table th.tacta-sort-asc::after {
+    content: "\25B2";
+    opacity: 1;
+    color: var(--tacta-accent);
+}
+
+.tacta-toolkit .tacta-table th.tacta-sort-desc::after {
+    content: "\25BC";
+    opacity: 1;
+    color: var(--tacta-accent);
+}
+
+.tacta-toolkit .tacta-table tbody tr {
+    transition: background var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-table tbody tr:nth-child(even) {
+    background: var(--tacta-bg-elevated);
+}
+
+.tacta-toolkit .tacta-table tbody tr:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-toolkit .tacta-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOASTS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-toast-container {
+    position: fixed;
+    top: var(--tacta-space-lg);
+    right: var(--tacta-space-lg);
+    z-index: var(--tacta-z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+    pointer-events: none;
+}
+
+.tacta-toolkit .tacta-toast {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--tacta-space-sm);
+    min-width: 280px;
+    max-width: 420px;
+    padding: var(--tacta-space-md) var(--tacta-space-lg);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    box-shadow: var(--tacta-shadow-md);
+    pointer-events: auto;
+    transform: translateX(120%);
+    transition: transform var(--tacta-transition-slide),
+                opacity var(--tacta-transition-normal);
+    opacity: 0;
+}
+
+.tacta-toolkit .tacta-toast.tacta-visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.tacta-toolkit .tacta-toast.tacta-toast-exit {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+.tacta-toolkit .tacta-toast-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+}
+
+.tacta-toolkit .tacta-toast-message {
+    flex: 1;
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text);
+    word-break: break-word;
+}
+
+.tacta-toolkit .tacta-toast-close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: none;
+    border: none;
+    color: var(--tacta-text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: var(--tacta-radius-sm);
+    transition: color var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-toast-close:hover {
+    color: var(--tacta-text);
+}
+
+/* Toast type accents (left border) */
+.tacta-toolkit .tacta-toast--success {
+    border-left: 3px solid var(--tacta-success);
+}
+
+.tacta-toolkit .tacta-toast--error {
+    border-left: 3px solid var(--tacta-error);
+}
+
+.tacta-toolkit .tacta-toast--warning {
+    border-left: 3px solid var(--tacta-warning);
+}
+
+.tacta-toolkit .tacta-toast--info {
+    border-left: 3px solid var(--tacta-info);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOGGLE SWITCHES
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-toolkit .tacta-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.tacta-toolkit .tacta-toggle-track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+    transition: background var(--tacta-transition-fast);
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--tacta-text);
+    border-radius: 50%;
+    transition: transform var(--tacta-transition-fast);
+}
+
+.tacta-toolkit .tacta-toggle input:checked + .tacta-toggle-track {
+    background: var(--tacta-accent);
+}
+
+.tacta-toolkit .tacta-toggle input:checked + .tacta-toggle-track::after {
+    transform: translateX(16px);
+}
+
+.tacta-toolkit .tacta-toggle input:focus-visible + .tacta-toggle-track {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+.tacta-toolkit .tacta-toggle-label {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   BADGES
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--tacta-space-xxs) var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--tacta-text);
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-full);
+    white-space: nowrap;
+}
+
+.tacta-toolkit .tacta-badge--success {
+    color: var(--tacta-success);
+    background: var(--tacta-success-bg);
+}
+
+.tacta-toolkit .tacta-badge--error {
+    color: var(--tacta-error);
+    background: var(--tacta-error-bg);
+}
+
+.tacta-toolkit .tacta-badge--warning {
+    color: var(--tacta-warning);
+    background: var(--tacta-warning-bg);
+}
+
+.tacta-toolkit .tacta-badge--info {
+    color: var(--tacta-info);
+    background: var(--tacta-info-bg);
+}
+
+.tacta-toolkit .tacta-badge--accent {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SIDEBAR
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--tacta-z-sidebar);
+    background: var(--tacta-bg-overlay);
+    opacity: 0;
+    transition: opacity var(--tacta-transition-normal);
+    pointer-events: none;
+}
+
+.tacta-toolkit .tacta-sidebar-overlay.tacta-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tacta-toolkit .tacta-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--tacta-z-sidebar);
+    width: 380px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    background: var(--tacta-bg);
+    border-left: 1px solid var(--tacta-border);
+    box-shadow: var(--tacta-shadow-xl);
+    transform: translateX(100%);
+    transition: transform var(--tacta-transition-slide);
+}
+
+.tacta-toolkit .tacta-sidebar.tacta-visible {
+    transform: translateX(0);
+}
+
+.tacta-toolkit .tacta-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--tacta-space-lg);
+    border-bottom: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+.tacta-toolkit .tacta-sidebar-title {
+    font-size: var(--tacta-font-size-lg);
+    font-weight: 600;
+}
+
+.tacta-toolkit .tacta-sidebar-body {
+    flex: 1;
+    overflow: auto;
+    padding: var(--tacta-space-lg);
+}
+
+.tacta-toolkit .tacta-sidebar-footer {
+    padding: var(--tacta-space-md) var(--tacta-space-lg);
+    border-top: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   CODE BLOCKS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-code {
+    display: block;
+    padding: var(--tacta-space-md);
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-sm);
+    line-height: 1.6;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    overflow-x: auto;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.tacta-toolkit code.tacta-code-inline {
+    display: inline;
+    padding: var(--tacta-space-xxs) var(--tacta-space-xs);
+    font-family: var(--tacta-font-mono);
+    font-size: 0.9em;
+    color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+    border-radius: var(--tacta-radius-sm);
+    white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SPINNER
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-toolkit .tacta-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--tacta-border);
+    border-top-color: var(--tacta-accent);
+    border-radius: 50%;
+    animation: tacta-spin 0.7s linear infinite;
+}
+
+.tacta-toolkit .tacta-spinner--sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+.tacta-toolkit .tacta-spinner--lg {
+    width: 36px;
+    height: 36px;
+    border-width: 4px;
+}
+
+@keyframes tacta-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Utility: centering wrapper for spinner ── */
+.tacta-toolkit .tacta-spinner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--tacta-space-xl);
+}

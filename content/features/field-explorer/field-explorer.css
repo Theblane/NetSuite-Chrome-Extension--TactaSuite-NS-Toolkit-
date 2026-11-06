@@ -1,0 +1,674 @@
+/**
+ * field-explorer.css
+ * NetSuite TactaSuite - Field Explorer Styles
+ *
+ * @author Blane Maher
+ *
+ * Scoped under .tacta-field-explorer to avoid collisions.
+ * Uses CSS custom properties from theme-vars.css.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   SIDEBAR OVERRIDE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer.tacta-sidebar {
+    width: 420px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+}
+
+.tacta-field-explorer .tacta-fe-loading-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ERROR STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+    text-align: center;
+}
+
+.tacta-field-explorer .tacta-fe-error-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+    max-width: 300px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SUMMARY BAR
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-summary {
+    display: flex;
+    gap: var(--tacta-space-sm);
+    padding-bottom: var(--tacta-space-md);
+    border-bottom: 1px solid var(--tacta-border);
+    margin-bottom: var(--tacta-space-md);
+}
+
+.tacta-field-explorer .tacta-fe-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--tacta-space-xxs);
+    padding: var(--tacta-space-sm);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+}
+
+.tacta-field-explorer .tacta-fe-stat-count {
+    font-size: var(--tacta-font-size-xl);
+    font-weight: 700;
+    color: var(--tacta-accent);
+    line-height: 1;
+}
+
+.tacta-field-explorer .tacta-fe-stat-label {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOOLBAR (SEARCH + ACTIONS)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+    margin-bottom: var(--tacta-space-md);
+}
+
+.tacta-field-explorer .tacta-fe-search {
+    width: 100%;
+    padding-left: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888888' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM6.5 11a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.tacta-field-explorer .tacta-fe-toolbar-actions {
+    display: flex;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-field-explorer .tacta-fe-toolbar-actions .tacta-btn {
+    flex: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FILTER BUTTONS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-filters {
+    display: flex;
+    gap: var(--tacta-space-xs);
+    margin-bottom: var(--tacta-space-md);
+    flex-wrap: wrap;
+}
+
+.tacta-field-explorer .tacta-fe-filter-btn {
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 120ms ease;
+}
+
+.tacta-field-explorer .tacta-fe-filter-btn:hover {
+    color: var(--tacta-text-secondary);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-field-explorer .tacta-fe-filter-btn.tacta-active {
+    color: var(--tacta-text-inverse);
+    background: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FIELD LIST
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-field-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-field-explorer .tacta-fe-empty {
+    text-align: center;
+    padding: var(--tacta-space-xl);
+    color: var(--tacta-text-muted);
+    font-size: var(--tacta-font-size-sm);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FIELD CARD
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-card {
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-left: 3px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+    transition: background 120ms ease,
+                border-color 120ms ease;
+}
+
+.tacta-field-explorer .tacta-fe-card:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-field-explorer .tacta-fe-card--expanded {
+    border-left-color: var(--tacta-accent);
+    background: var(--tacta-bg-hover);
+}
+
+/* Mandatory: red left border */
+.tacta-field-explorer .tacta-fe-card--mandatory {
+    border-left-color: var(--tacta-error);
+}
+
+/* Hidden: dimmed */
+.tacta-field-explorer .tacta-fe-card--hidden {
+    opacity: 0.6;
+}
+
+.tacta-field-explorer .tacta-fe-card--hidden:hover {
+    opacity: 0.85;
+}
+
+/* Disabled */
+.tacta-field-explorer .tacta-fe-card--disabled .tacta-fe-card-name {
+    text-decoration: line-through;
+    color: var(--tacta-text-muted);
+}
+
+/* ── Card Header ── */
+.tacta-field-explorer .tacta-fe-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tacta-space-sm);
+    margin-bottom: var(--tacta-space-xxs);
+}
+
+.tacta-field-explorer .tacta-fe-card-name {
+    min-width: 0;
+    flex: 1;
+    font-size: var(--tacta-font-size-md);
+    font-weight: 600;
+    color: var(--tacta-text);
+    word-break: break-word;
+}
+
+.tacta-field-explorer .tacta-fe-card-id {
+    margin-bottom: var(--tacta-space-xxs);
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-secondary);
+    cursor: pointer;
+    word-break: break-all;
+    transition: color 120ms ease;
+}
+
+.tacta-field-explorer .tacta-fe-card-id:hover {
+    color: var(--tacta-accent);
+    text-decoration: underline;
+}
+
+.tacta-field-explorer .tacta-fe-card-type {
+    flex-shrink: 0;
+    padding: var(--tacta-space-xxs) var(--tacta-space-xs);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* ── Card Label ── */
+.tacta-field-explorer .tacta-fe-card-label {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+    margin-bottom: var(--tacta-space-xxs);
+}
+
+/* ── Card Value ── */
+.tacta-field-explorer .tacta-fe-card-value {
+    font-size: var(--tacta-font-size-xs);
+    font-family: var(--tacta-font-mono);
+    color: var(--tacta-text-muted);
+    background: var(--tacta-bg);
+    padding: var(--tacta-space-xxs) var(--tacta-space-xs);
+    border-radius: var(--tacta-radius-sm);
+    word-break: break-all;
+    margin-bottom: var(--tacta-space-xxs);
+}
+
+/* ── Status Indicators ── */
+.tacta-field-explorer .tacta-fe-card-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tacta-space-xs);
+    margin-top: var(--tacta-space-xs);
+}
+
+.tacta-field-explorer .tacta-fe-indicator {
+    display: inline-block;
+    padding: 1px var(--tacta-space-xs);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: var(--tacta-radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.tacta-field-explorer .tacta-fe-indicator--mandatory {
+    color: var(--tacta-error);
+    background: var(--tacta-error-bg);
+}
+
+.tacta-field-explorer .tacta-fe-indicator--hidden {
+    color: var(--tacta-warning);
+    background: var(--tacta-warning-bg);
+}
+
+.tacta-field-explorer .tacta-fe-indicator--disabled {
+    color: var(--tacta-text-muted);
+    background: var(--tacta-bg-active);
+}
+
+.tacta-field-explorer .tacta-fe-indicator--sublist {
+    color: var(--tacta-info);
+    background: var(--tacta-info-bg);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   EXPANDED DETAILS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-card-details {
+    margin-top: var(--tacta-space-sm);
+    padding-top: var(--tacta-space-sm);
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-field-explorer .tacta-fe-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--tacta-space-xxs) 0;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-field-explorer .tacta-fe-detail-key {
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tacta-field-explorer .tacta-fe-detail-value {
+    font-size: var(--tacta-font-size-xs);
+    font-family: var(--tacta-font-mono);
+    color: var(--tacta-text-secondary);
+    text-align: right;
+    word-break: break-all;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FIELD HISTORY (systemnote rows)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-history-load {
+    cursor: pointer;
+}
+
+.tacta-field-explorer .tacta-fe-history-loading {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-xs) 0;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-history-list {
+    margin: var(--tacta-space-xs) 0 var(--tacta-space-xs);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-sm);
+    max-height: 260px;
+    overflow-y: auto;
+    cursor: default;
+}
+
+.tacta-field-explorer .tacta-fe-history-row {
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    border-bottom: 1px solid var(--tacta-border);
+    font-size: var(--tacta-font-size-xs);
+}
+
+.tacta-field-explorer .tacta-fe-history-row:last-of-type {
+    border-bottom: none;
+}
+
+.tacta-field-explorer .tacta-fe-history-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--tacta-space-sm);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-history-date {
+    white-space: nowrap;
+}
+
+.tacta-field-explorer .tacta-fe-history-user {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.tacta-field-explorer .tacta-fe-history-change {
+    display: flex;
+    align-items: baseline;
+    gap: var(--tacta-space-xs);
+    margin-top: 2px;
+    font-family: var(--tacta-font-mono);
+}
+
+.tacta-field-explorer .tacta-fe-history-old,
+.tacta-field-explorer .tacta-fe-history-new {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tacta-field-explorer .tacta-fe-history-old {
+    color: var(--tacta-text-muted);
+    text-decoration: line-through;
+}
+
+.tacta-field-explorer .tacta-fe-history-arrow {
+    flex-shrink: 0;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-history-new {
+    color: var(--tacta-accent);
+}
+
+.tacta-field-explorer .tacta-fe-history-more {
+    display: block;
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    border-top: 1px solid var(--tacta-border);
+    text-align: left;
+}
+
+.tacta-field-explorer .tacta-fe-history-empty,
+.tacta-field-explorer .tacta-fe-history-error {
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-history-error {
+    color: var(--tacta-error);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOGGLE LINKS (Mandatory / Disabled)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-toggle-link {
+    cursor: pointer;
+    padding: 1px 6px;
+    border-radius: var(--tacta-radius-sm);
+    border: 1px solid var(--tacta-border);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    user-select: none;
+}
+
+.tacta-field-explorer .tacta-fe-toggle-link:hover {
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+}
+
+.tacta-field-explorer .tacta-fe-toggle-link.tacta-fe-toggle--on {
+    background: rgba(118, 192, 67, 0.15);
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+    font-weight: 600;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   OVERRIDE VALUE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-override-section {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-field-explorer .tacta-fe-override-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.tacta-field-explorer .tacta-fe-override-input,
+.tacta-field-explorer .tacta-fe-override-select {
+    flex: 1;
+    padding: 4px 8px;
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-sm);
+    outline: none;
+    min-width: 0;
+}
+
+.tacta-field-explorer .tacta-fe-override-input:focus,
+.tacta-field-explorer .tacta-fe-override-select:focus {
+    border-color: var(--tacta-accent);
+}
+
+.tacta-field-explorer .tacta-fe-override-btn {
+    flex-shrink: 0;
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    border-color: var(--tacta-accent);
+    font-weight: 600;
+}
+
+.tacta-field-explorer .tacta-fe-override-btn:hover {
+    background: var(--tacta-accent-hover);
+    border-color: var(--tacta-accent-hover);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SELECT OPTIONS LIST
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-options-list {
+    margin-top: 4px;
+}
+
+.tacta-field-explorer .tacta-fe-options-loading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 0;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-options-table {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-sm);
+    margin-top: 4px;
+}
+
+.tacta-field-explorer .tacta-fe-options-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 8px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--tacta-border);
+    transition: background 0.1s;
+}
+
+.tacta-field-explorer .tacta-fe-options-row:last-child {
+    border-bottom: none;
+}
+
+.tacta-field-explorer .tacta-fe-options-row:hover {
+    background: var(--tacta-bg-hover);
+}
+
+.tacta-field-explorer .tacta-fe-options-row--current {
+    background: rgba(118, 192, 67, 0.1);
+}
+
+.tacta-field-explorer .tacta-fe-options-value {
+    font-family: var(--tacta-font-mono);
+    color: var(--tacta-accent);
+    font-weight: 600;
+    min-width: 40px;
+    flex-shrink: 0;
+}
+
+.tacta-field-explorer .tacta-fe-options-text {
+    color: var(--tacta-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   CUSTOM FIELD METADATA
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-field-explorer .tacta-fe-custom-section {
+    margin-top: var(--tacta-space-sm);
+    padding-top: var(--tacta-space-sm);
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-field-explorer .tacta-fe-custom-loading {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-xs) 0;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-field-explorer .tacta-fe-custom-loading .tacta-spinner--sm {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+    flex-shrink: 0;
+}
+
+.tacta-field-explorer .tacta-fe-link {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-accent);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 120ms ease;
+}
+
+.tacta-field-explorer .tacta-fe-link:hover {
+    color: var(--tacta-accent-hover);
+    text-decoration: underline;
+}
+
+.tacta-field-explorer .tacta-fe-formula-value {
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-warning);
+    background: var(--tacta-warning-bg);
+    padding: var(--tacta-space-xxs) var(--tacta-space-xs);
+    border-radius: var(--tacta-radius-sm);
+    word-break: break-all;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.tacta-field-explorer .tacta-fe-detail-row--formula {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--tacta-space-xxs);
+}
+
+.tacta-field-explorer .tacta-fe-help-text {
+    font-style: italic;
+    word-break: break-word;
+    white-space: normal;
+    text-align: right;
+}
+
+.tacta-field-explorer .tacta-fe-detail-row--help {
+    align-items: flex-start;
+}
+
+.tacta-field-explorer .tacta-fe-source-section {
+    margin-top: var(--tacta-space-xs);
+}
+
+/* Spinner size fix for inline loading indicators */
+.tacta-field-explorer .tacta-spinner--sm {
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+}

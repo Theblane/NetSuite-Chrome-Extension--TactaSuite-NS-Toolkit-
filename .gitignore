@@ -1,0 +1,19 @@
+*.log
+*.tmp
+*.bak
+*.zip
+
+.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+build/
+playwright-report/
+test-results/
+
+.env
+.env.*
+
+# Extension signing keys - NEVER commit
+*.pem

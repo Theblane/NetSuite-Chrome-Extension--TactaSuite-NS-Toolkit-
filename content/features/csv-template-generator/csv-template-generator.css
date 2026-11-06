@@ -1,0 +1,281 @@
+/**
+ * csv-template-generator.css
+ * NetSuite TactaSuite - CSV Template Generator Panel Styles
+ *
+ * @author Blane Maher
+ *
+ * All rules are scoped under .tacta-csv-tmpl to avoid collisions.
+ * Injected into the Shadow Root via TactaDOM.injectStylesheet().
+ */
+
+/* ── Panel body layout ─────────────────────────────────────────── */
+
+.tacta-csv-tmpl {
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-md, 13px);
+}
+
+/* ── Loading state ─────────────────────────────────────────────── */
+
+.tacta-csv-tmpl-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    color: var(--tacta-text-muted, #888);
+    font-size: 12px;
+}
+
+/* ── Error state ───────────────────────────────────────────────── */
+
+.tacta-csv-tmpl-error {
+    padding: 10px 12px;
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ── Record info ───────────────────────────────────────────────── */
+
+.tacta-csv-tmpl-info {
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: var(--tacta-radius-md, 6px);
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+.tacta-csv-tmpl-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.tacta-csv-tmpl-info-row:last-child { margin-bottom: 0; }
+
+.tacta-csv-tmpl-info-key {
+    font-size: 11px;
+    color: var(--tacta-text-muted, #888);
+    min-width: 42px;
+    flex-shrink: 0;
+}
+
+.tacta-csv-tmpl-info-val {
+    font-size: 12px;
+    color: var(--tacta-text, #fff);
+}
+
+.tacta-csv-tmpl-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: var(--tacta-radius-full, 9999px);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.tacta-csv-tmpl-badge--view   { background: rgba(52, 152, 219, 0.2); color: #5dade2; }
+.tacta-csv-tmpl-badge--edit   { background: rgba(118, 192, 67, 0.2); color: var(--tacta-accent, #76c043); }
+.tacta-csv-tmpl-badge--create { background: rgba(241, 196, 15, 0.2); color: #f5d33a; }
+
+/* ── Option groups ─────────────────────────────────────────────── */
+
+.tacta-csv-tmpl-opt-group {
+    margin-bottom: 10px;
+}
+
+.tacta-csv-tmpl-opt-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--tacta-text-muted, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.tacta-csv-tmpl-opt-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+}
+
+.tacta-csv-tmpl-opt-row input[type="radio"],
+.tacta-csv-tmpl-opt-row input[type="checkbox"] {
+    accent-color: var(--tacta-accent, #76c043);
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+}
+
+.tacta-csv-tmpl-opt-row label {
+    font-size: 12px;
+    color: var(--tacta-text-secondary, #ccc);
+    cursor: pointer;
+    line-height: 1.3;
+}
+
+.tacta-csv-tmpl-opt-row--off label,
+.tacta-csv-tmpl-opt-row--off input {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ── Manual field selection panel ──────────────────────────────── */
+
+.tacta-csv-tmpl-manual-panel {
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: var(--tacta-radius-md, 6px);
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.tacta-csv-tmpl-manual-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tacta-accent, #76c043);
+    cursor: pointer;
+    user-select: none;
+    background: var(--tacta-bg-elevated, #222);
+    border-bottom: 1px solid var(--tacta-border, #333);
+}
+
+.tacta-csv-tmpl-arrow {
+    font-size: 9px;
+    transition: transform 0.15s ease;
+    display: inline-block;
+}
+
+.tacta-csv-tmpl-arrow.expanded {
+    transform: rotate(90deg);
+}
+
+.tacta-csv-tmpl-manual-body {
+    display: none;
+    max-height: 190px;
+    overflow-y: auto;
+    padding: 4px 10px 8px;
+}
+
+.tacta-csv-tmpl-manual-body.open {
+    display: block;
+}
+
+/* Section label inside manual body */
+.tacta-csv-tmpl-section-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--tacta-text-muted, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 5px 0 3px;
+    border-top: 1px solid var(--tacta-border, #333);
+    margin-top: 3px;
+}
+
+.tacta-csv-tmpl-section-lbl:first-child {
+    border-top: none;
+    margin-top: 0;
+}
+
+/* Field rows */
+.tacta-csv-tmpl-field-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 2px;
+}
+
+.tacta-csv-tmpl-field-row input[type="checkbox"] {
+    accent-color: var(--tacta-accent, #76c043);
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.tacta-csv-tmpl-field-lbl {
+    font-size: 11px;
+    color: var(--tacta-text-secondary, #ccc);
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.tacta-csv-tmpl-field-val {
+    font-size: 10px;
+    color: var(--tacta-text-muted, #888);
+    flex-shrink: 0;
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: italic;
+}
+
+/* Sublist master row */
+.tacta-csv-tmpl-sl-master-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 0 2px;
+    border-top: 1px solid var(--tacta-border, #333);
+    margin-top: 4px;
+}
+
+.tacta-csv-tmpl-sl-master-row input[type="checkbox"] {
+    accent-color: var(--tacta-accent, #76c043);
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.tacta-csv-tmpl-sl-master-lbl {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--tacta-accent, #76c043);
+    cursor: pointer;
+}
+
+.tacta-csv-tmpl-sl-col-group {
+    padding-left: 14px;
+    transition: opacity 0.15s;
+}
+
+.tacta-csv-tmpl-sl-col-group--off {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* ── Download button ───────────────────────────────────────────── */
+
+.tacta-csv-tmpl-dl-wrap {
+    padding-top: 6px;
+}
+
+.tacta-csv-tmpl-dl-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.tacta-csv-tmpl-dl-btn--ok {
+    background: #2ecc71 !important;
+    border-color: #2ecc71 !important;
+}

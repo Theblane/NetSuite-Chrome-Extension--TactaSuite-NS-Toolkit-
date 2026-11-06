@@ -1,0 +1,330 @@
+/**
+ * workflow-colors.css
+ * NetSuite TactaSuite - Workflow Colors Styles
+ *
+ * @author Blane Maher
+ *
+ * Color-codes workflow states and transitions on NetSuite workflow setup
+ * pages. Colors are subtle background tints to keep the page readable.
+ *
+ * State types:
+ *   entry     → green tint
+ *   exit      → red tint
+ *   approval  → blue tint
+ *   rejection → orange tint
+ *   default   → subtle gray
+ *
+ * Transition types:
+ *   always    → green
+ *   formula   → purple
+ *   field     → teal
+ *   button    → blue
+ *   default   → muted blue
+ *
+ * Scoped via .tacta-wfc-* classes applied by workflow-colors.js.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   STATE NODE COLORS — Diagram View
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Base state styling — subtle rounded appearance */
+.tacta-wfc-state {
+    border-radius: 3px;
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+/* Entry states — green tint */
+.tacta-wfc-state-entry {
+    background-color: rgba(76, 175, 80, 0.15) !important;
+    border-left: 3px solid #4caf50 !important;
+    box-shadow: inset 0 0 0 1px rgba(76, 175, 80, 0.25);
+}
+
+/* Exit / End states — red tint */
+.tacta-wfc-state-exit {
+    background-color: rgba(244, 67, 54, 0.12) !important;
+    border-left: 3px solid #f44336 !important;
+    box-shadow: inset 0 0 0 1px rgba(244, 67, 54, 0.20);
+}
+
+/* Approval states — blue tint */
+.tacta-wfc-state-approval {
+    background-color: rgba(33, 150, 243, 0.12) !important;
+    border-left: 3px solid #2196f3 !important;
+    box-shadow: inset 0 0 0 1px rgba(33, 150, 243, 0.20);
+}
+
+/* Rejection states — orange tint */
+.tacta-wfc-state-rejection {
+    background-color: rgba(255, 152, 0, 0.12) !important;
+    border-left: 3px solid #ff9800 !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 152, 0, 0.20);
+}
+
+/* Default / Other states — subtle gray */
+.tacta-wfc-state-default {
+    background-color: rgba(158, 158, 158, 0.08) !important;
+    border-left: 3px solid #9e9e9e !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   TRANSITION COLORS — Diagram View
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Base transition styling */
+.tacta-wfc-trans {
+    transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+/* Always transitions — green */
+.tacta-wfc-trans-always {
+    background-color: rgba(76, 175, 80, 0.10) !important;
+    border-left: 3px solid #4caf50 !important;
+}
+
+/* Formula transitions — purple */
+.tacta-wfc-trans-formula {
+    background-color: rgba(156, 39, 176, 0.10) !important;
+    border-left: 3px solid #9c27b0 !important;
+}
+
+/* Field-based transitions — teal */
+.tacta-wfc-trans-field {
+    background-color: rgba(0, 150, 136, 0.10) !important;
+    border-left: 3px solid #009688 !important;
+}
+
+/* Button transitions — blue */
+.tacta-wfc-trans-button {
+    background-color: rgba(33, 150, 243, 0.10) !important;
+    border-left: 3px solid #2196f3 !important;
+}
+
+/* Default transitions — muted blue-gray */
+.tacta-wfc-trans-default {
+    background-color: rgba(96, 125, 139, 0.08) !important;
+    border-left: 3px solid #607d8b !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   STATE ROW COLORS — List / Table View
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Base state row — left border indicator + subtle background */
+.tacta-wfc-state-row {
+    transition: background-color 200ms ease;
+}
+
+/* Entry state rows */
+.tacta-wfc-state-row-entry {
+    background-color: rgba(76, 175, 80, 0.08) !important;
+    border-left: 4px solid #4caf50 !important;
+}
+
+.tacta-wfc-state-row-entry > td:first-child {
+    padding-left: 8px;
+}
+
+/* Exit state rows */
+.tacta-wfc-state-row-exit {
+    background-color: rgba(244, 67, 54, 0.06) !important;
+    border-left: 4px solid #f44336 !important;
+}
+
+.tacta-wfc-state-row-exit > td:first-child {
+    padding-left: 8px;
+}
+
+/* Approval state rows */
+.tacta-wfc-state-row-approval {
+    background-color: rgba(33, 150, 243, 0.06) !important;
+    border-left: 4px solid #2196f3 !important;
+}
+
+.tacta-wfc-state-row-approval > td:first-child {
+    padding-left: 8px;
+}
+
+/* Rejection state rows */
+.tacta-wfc-state-row-rejection {
+    background-color: rgba(255, 152, 0, 0.06) !important;
+    border-left: 4px solid #ff9800 !important;
+}
+
+.tacta-wfc-state-row-rejection > td:first-child {
+    padding-left: 8px;
+}
+
+/* Default state rows */
+.tacta-wfc-state-row-default {
+    border-left: 4px solid transparent !important;
+}
+
+.tacta-wfc-state-row-default > td:first-child {
+    padding-left: 8px;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   TRANSITION ROW COLORS — List / Table View
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-wfc-trans-row {
+    transition: background-color 200ms ease;
+}
+
+.tacta-wfc-trans-row-always {
+    background-color: rgba(76, 175, 80, 0.06) !important;
+    border-left: 4px solid #4caf50 !important;
+}
+
+.tacta-wfc-trans-row-always > td:first-child {
+    padding-left: 8px;
+}
+
+.tacta-wfc-trans-row-formula {
+    background-color: rgba(156, 39, 176, 0.06) !important;
+    border-left: 4px solid #9c27b0 !important;
+}
+
+.tacta-wfc-trans-row-formula > td:first-child {
+    padding-left: 8px;
+}
+
+.tacta-wfc-trans-row-field {
+    background-color: rgba(0, 150, 136, 0.06) !important;
+    border-left: 4px solid #009688 !important;
+}
+
+.tacta-wfc-trans-row-field > td:first-child {
+    padding-left: 8px;
+}
+
+.tacta-wfc-trans-row-button {
+    background-color: rgba(33, 150, 243, 0.06) !important;
+    border-left: 4px solid #2196f3 !important;
+}
+
+.tacta-wfc-trans-row-button > td:first-child {
+    padding-left: 8px;
+}
+
+.tacta-wfc-trans-row-default {
+    border-left: 4px solid transparent !important;
+}
+
+.tacta-wfc-trans-row-default > td:first-child {
+    padding-left: 8px;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   HOVER ENHANCEMENTS
+   ════════════════════════════════════════════════════════════════════
+   Slightly intensify the tint on hover for interactive feedback.
+*/
+
+.tacta-wfc-state-entry:hover {
+    background-color: rgba(76, 175, 80, 0.22) !important;
+}
+
+.tacta-wfc-state-exit:hover {
+    background-color: rgba(244, 67, 54, 0.18) !important;
+}
+
+.tacta-wfc-state-approval:hover {
+    background-color: rgba(33, 150, 243, 0.18) !important;
+}
+
+.tacta-wfc-state-rejection:hover {
+    background-color: rgba(255, 152, 0, 0.18) !important;
+}
+
+.tacta-wfc-state-default:hover {
+    background-color: rgba(158, 158, 158, 0.14) !important;
+}
+
+.tacta-wfc-state-row-entry:hover,
+.tacta-wfc-state-row-exit:hover,
+.tacta-wfc-state-row-approval:hover,
+.tacta-wfc-state-row-rejection:hover {
+    filter: brightness(0.97);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   SVG DIAGRAM ELEMENTS
+   ════════════════════════════════════════════════════════════════════
+   NetSuite may render the workflow diagram using SVG. These rules
+   target SVG elements that represent states and transitions.
+*/
+
+/* SVG state rectangles */
+svg .tacta-wfc-state-entry rect,
+svg .tacta-wfc-state-entry {
+    fill: rgba(76, 175, 80, 0.20);
+    stroke: #4caf50;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-state-exit rect,
+svg .tacta-wfc-state-exit {
+    fill: rgba(244, 67, 54, 0.15);
+    stroke: #f44336;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-state-approval rect,
+svg .tacta-wfc-state-approval {
+    fill: rgba(33, 150, 243, 0.15);
+    stroke: #2196f3;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-state-rejection rect,
+svg .tacta-wfc-state-rejection {
+    fill: rgba(255, 152, 0, 0.15);
+    stroke: #ff9800;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-state-default rect,
+svg .tacta-wfc-state-default {
+    fill: rgba(158, 158, 158, 0.10);
+    stroke: #9e9e9e;
+    stroke-width: 1;
+}
+
+/* SVG transition lines/paths */
+svg .tacta-wfc-trans-always line,
+svg .tacta-wfc-trans-always path {
+    stroke: #4caf50;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-trans-formula line,
+svg .tacta-wfc-trans-formula path {
+    stroke: #9c27b0;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-trans-field line,
+svg .tacta-wfc-trans-field path {
+    stroke: #009688;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-trans-button line,
+svg .tacta-wfc-trans-button path {
+    stroke: #2196f3;
+    stroke-width: 2;
+}
+
+svg .tacta-wfc-trans-default line,
+svg .tacta-wfc-trans-default path {
+    stroke: #607d8b;
+    stroke-width: 1.5;
+}

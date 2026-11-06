@@ -1,0 +1,63 @@
+.tacta-ssex-button {
+  margin: 6px 0 8px 0;
+  padding: 5px 10px;
+  border: 1px solid var(--tacta-border, #333);
+  border-radius: 6px;
+  background: var(--tacta-bg, #1f2933);
+  color: var(--tacta-text, #fff);
+  font: 600 12px var(--tacta-font-family, Arial, sans-serif);
+  cursor: pointer;
+}
+
+.tacta-ssex {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  width: min(760px, calc(100vw - 48px));
+  height: min(680px, calc(100vh - 120px));
+  z-index: 10300;
+  display: flex;
+  flex-direction: column;
+  background: var(--tacta-bg, #111827);
+  color: var(--tacta-text, #f9fafb);
+  border: 1px solid var(--tacta-border, #374151);
+  border-radius: 8px;
+  box-shadow: var(--tacta-shadow-lg, 0 16px 40px rgba(0, 0, 0, 0.35));
+  font-family: var(--tacta-font-family, Arial, sans-serif);
+}
+
+.tacta-ssex-head,
+.tacta-ssex-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--tacta-border, #374151);
+}
+
+.tacta-ssex-actions {
+  justify-content: flex-start;
+}
+
+.tacta-ssex button {
+  border: 1px solid var(--tacta-border, #374151);
+  border-radius: 6px;
+  background: var(--tacta-bg-hover, #1f2937);
+  color: inherit;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.tacta-ssex textarea {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  resize: none;
+  border: 0;
+  padding: 12px;
+  background: #0b1220;
+  color: #e5e7eb;
+  font: 12px/1.5 Consolas, Monaco, monospace;
+  box-sizing: border-box;
+}

@@ -1,0 +1,460 @@
+/**
+ * script-explorer.css
+ * NetSuite TactaSuite - Script Explorer Styles
+ *
+ * @author Blane Maher
+ *
+ * Scoped under .tacta-script-explorer to avoid collisions.
+ * Uses CSS custom properties from theme-vars.css.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   PANEL LAYOUT
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer {
+    min-width: 420px;
+    min-height: 300px;
+}
+
+.tacta-script-explorer .tacta-panel-body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOOLBAR (SEARCH + COUNT)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    border-bottom: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+.tacta-script-explorer-search {
+    flex: 1;
+    padding-left: 32px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23888888' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM6.5 11a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.tacta-script-explorer-count {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TAB BAR
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-tab-bar {
+    display: flex;
+    align-items: center;
+    background: var(--tacta-bg-elevated);
+    border-bottom: 1px solid var(--tacta-border);
+    overflow-x: auto;
+    flex-shrink: 0;
+    min-height: 32px;
+    gap: 0;
+    padding: 0 var(--tacta-space-xs);
+}
+
+.tacta-script-explorer-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--tacta-space-xs) var(--tacta-space-md);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--tacta-transition-fast),
+                border-color var(--tacta-transition-fast);
+}
+
+.tacta-script-explorer-tab:hover {
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-script-explorer-tab--active {
+    color: var(--tacta-accent);
+    border-bottom-color: var(--tacta-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SCRIPT LIST
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--tacta-space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-xs);
+}
+
+.tacta-script-explorer-empty {
+    text-align: center;
+    padding: var(--tacta-space-xxl);
+    color: var(--tacta-text-muted);
+    font-size: var(--tacta-font-size-sm);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+}
+
+.tacta-script-explorer-loading-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ERROR STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+    text-align: center;
+}
+
+.tacta-script-explorer-error-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tacta-error-bg);
+    color: var(--tacta-error);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: var(--tacta-font-size-lg);
+}
+
+.tacta-script-explorer-error-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+    max-width: 400px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SCRIPT CARD
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-card {
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    transition: background var(--tacta-transition-fast),
+                border-color var(--tacta-transition-fast);
+}
+
+.tacta-script-explorer-card:hover {
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-script-explorer-card--expanded {
+    border-color: var(--tacta-accent);
+    background: var(--tacta-bg-hover);
+}
+
+/* ── Card Header ── */
+.tacta-script-explorer-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-sm) var(--tacta-space-md);
+    cursor: pointer;
+    user-select: none;
+}
+
+.tacta-script-explorer-card-header:hover {
+    background: var(--tacta-bg-hover);
+    border-radius: var(--tacta-radius-md);
+}
+
+.tacta-script-explorer-card-header-left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-xxs);
+}
+
+.tacta-script-explorer-card-name {
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    color: var(--tacta-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-script-explorer-card-id {
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-script-explorer-card-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    flex-shrink: 0;
+}
+
+/* ── Chevron ── */
+.tacta-script-explorer-chevron {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+    transition: transform var(--tacta-transition-fast);
+}
+
+.tacta-script-explorer-chevron--open {
+    transform: rotate(90deg);
+}
+
+/* ── Description ── */
+.tacta-script-explorer-card-desc {
+    padding: 0 var(--tacta-space-md) var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    line-height: var(--tacta-line-height);
+    border-top: 1px solid var(--tacta-border);
+    margin: 0 var(--tacta-space-sm);
+    padding-top: var(--tacta-space-sm);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SCRIPT TYPE BADGES
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-badge {
+    display: inline-block;
+    padding: var(--tacta-space-xxs) var(--tacta-space-sm);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: var(--tacta-radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+/* User Event = Blue */
+.tacta-script-explorer-badge-ue {
+    color: #4a9eff;
+    background: rgba(74, 158, 255, 0.15);
+}
+
+/* Client Script = Green */
+.tacta-script-explorer-badge-cs {
+    color: #76c043;
+    background: rgba(118, 192, 67, 0.15);
+}
+
+/* Scheduled = Orange */
+.tacta-script-explorer-badge-sch {
+    color: #f39c12;
+    background: rgba(243, 156, 18, 0.15);
+}
+
+/* Map/Reduce = Purple */
+.tacta-script-explorer-badge-mr {
+    color: #b07ce8;
+    background: rgba(176, 124, 232, 0.15);
+}
+
+/* Suitelet = Teal */
+.tacta-script-explorer-badge-sl {
+    color: #1abc9c;
+    background: rgba(26, 188, 156, 0.15);
+}
+
+/* Restlet = Pink */
+.tacta-script-explorer-badge-rl {
+    color: #e74c8b;
+    background: rgba(231, 76, 139, 0.15);
+}
+
+/* Other/Fallback */
+.tacta-script-explorer-badge-other {
+    color: var(--tacta-text-muted);
+    background: var(--tacta-bg-active);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   DEPLOYMENT COUNT
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-deploy-count {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   DEPLOYMENTS AREA
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-deployments {
+    border-top: 1px solid var(--tacta-border);
+    margin: 0 var(--tacta-space-sm) var(--tacta-space-sm);
+    padding-top: var(--tacta-space-sm);
+}
+
+.tacta-script-explorer-deploy-loading {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-script-explorer-deploy-empty {
+    padding: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    text-align: center;
+    font-style: italic;
+}
+
+.tacta-script-explorer-deploy-error {
+    padding: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-error);
+    text-align: center;
+}
+
+/* ── Deployment Row ── */
+.tacta-script-explorer-deploy-row {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-xs) var(--tacta-space-sm);
+    border-radius: var(--tacta-radius-sm);
+    transition: background var(--tacta-transition-fast);
+}
+
+.tacta-script-explorer-deploy-row:hover:not(.tacta-script-explorer-deploy-row--header) {
+    background: var(--tacta-bg-active);
+}
+
+.tacta-script-explorer-deploy-row--header {
+    border-bottom: 1px solid var(--tacta-border);
+    margin-bottom: var(--tacta-space-xxs);
+}
+
+.tacta-script-explorer-deploy-row--header .tacta-script-explorer-deploy-cell {
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-size: 10px;
+}
+
+/* ── Deployment Cells ── */
+.tacta-script-explorer-deploy-cell {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-script-explorer-deploy-cell--id {
+    flex: 2;
+    font-family: var(--tacta-font-mono);
+    color: var(--tacta-accent);
+    min-width: 0;
+}
+
+.tacta-script-explorer-deploy-cell--rec {
+    flex: 1.5;
+    min-width: 0;
+}
+
+.tacta-script-explorer-deploy-cell--status {
+    flex: 1;
+    min-width: 0;
+}
+
+.tacta-script-explorer-deploy-cell--log {
+    flex: 0.8;
+    min-width: 0;
+    text-align: right;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   STATUS INDICATORS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-script-explorer-status {
+    display: inline-block;
+    padding: 1px var(--tacta-space-xs);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: var(--tacta-radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.tacta-script-explorer-status-released {
+    color: var(--tacta-success);
+    background: var(--tacta-success-bg);
+}
+
+.tacta-script-explorer-status-notscheduled {
+    color: var(--tacta-warning);
+    background: var(--tacta-warning-bg);
+}
+
+.tacta-script-explorer-status-scheduled {
+    color: var(--tacta-info);
+    background: var(--tacta-info-bg);
+}
+
+.tacta-script-explorer-status-unknown {
+    color: var(--tacta-text-muted);
+    background: var(--tacta-bg-active);
+}

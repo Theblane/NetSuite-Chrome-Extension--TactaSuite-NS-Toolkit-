@@ -1,0 +1,68 @@
+/**
+ * screenshot-studio-page.css
+ * NetSuite TactaSuite - Screenshot Studio Page Styles (Document Head)
+ *
+ * @author Blane Maher
+ *
+ * These rules style the NetSuite page itself during a capture, so they must be
+ * in the main document (not the toolkit shadow root). The content script
+ * injects this file through the injectFeatureFiles message.
+ *
+ * Everything here is inert until the content script adds the relevant class
+ * (mask spans, overlay layer, body.tacta-shot-capturing, body.tacta-shot-clean)
+ * and is removed again as soon as the capture finishes.
+ */
+
+/* ── Privacy mask: wrapped text renders as a solid bar ──────────── */
+
+.tacta-shot-mask {
+    background: #222 !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    text-decoration: none !important;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.tacta-shot-mask * {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* Overlay layer for input / textarea values */
+
+.tacta-shot-mask-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    z-index: 2147483000;
+    pointer-events: none;
+}
+
+.tacta-shot-mask-overlay {
+    position: absolute;
+    background: #222;
+    border-radius: 2px;
+}
+
+/* ── Full page: fixed / sticky elements appear once, in flow ────── */
+
+body.tacta-shot-capturing .tacta-shot-fixed,
+body.tacta-shot-capturing .uir-header,
+body.tacta-shot-capturing #ns_header {
+    position: static !important;
+}
+
+/* ── Clean mode: hide NetSuite header and navigation ───────────── */
+
+body.tacta-shot-clean #ns_header,
+body.tacta-shot-clean .uir-header,
+body.tacta-shot-clean #ns_navigation,
+body.tacta-shot-clean .ns-header {
+    display: none !important;
+}

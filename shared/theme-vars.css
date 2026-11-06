@@ -1,0 +1,129 @@
+/**
+ * theme-vars.css
+ * NetSuite TactaSuite - CSS Custom Properties
+ *
+ * @author Blane Maher
+ *
+ * Defines the TactaSuite theme as CSS custom properties. The defaults are the
+ * Light scheme; shared/theme-manager.js swaps in Dark or High Contrast at runtime.
+ * All variables use the --tacta- prefix to avoid collisions with
+ * NetSuite or other extensions.
+ *
+ * Usage: Import this file before any other toolkit stylesheet.
+ */
+
+:root {
+    /* ── Primary Colors ─────────────────────────────────────────── */
+    --tacta-bg:              #f7f8fa;
+    --tacta-bg-elevated:     #ffffff;
+    --tacta-bg-hover:        #eef1f4;
+    --tacta-bg-active:       #e4e8ed;
+    --tacta-bg-overlay:      rgba(15, 23, 42, 0.35);
+
+    --tacta-accent:          #76c043;
+    --tacta-accent-hover:    #8ad454;
+    --tacta-accent-active:   #65a738;
+    --tacta-accent-muted:    rgba(118, 192, 67, 0.15);
+
+    --tacta-text:            #17202a;
+    --tacta-text-secondary:  #3d4854;
+    --tacta-text-muted:      #66717d;
+    --tacta-text-inverse:    #ffffff;
+
+    --tacta-border:          #d7dde4;
+    --tacta-border-light:    #c3ccd6;
+    --tacta-border-focus:    #76c043;
+
+    /* ── Semantic Colors ────────────────────────────────────────── */
+    --tacta-success:         #76c043;
+    --tacta-success-bg:      rgba(118, 192, 67, 0.12);
+    --tacta-error:           #e74c3c;
+    --tacta-error-bg:        rgba(231, 76, 60, 0.12);
+    --tacta-warning:         #f39c12;
+    --tacta-warning-bg:      rgba(243, 156, 18, 0.12);
+    --tacta-info:            #3498db;
+    --tacta-info-bg:         rgba(52, 152, 219, 0.12);
+
+    /* ── Spacing ────────────────────────────────────────────────── */
+    --tacta-space-xxs:       2px;
+    --tacta-space-xs:        4px;
+    --tacta-space-sm:        8px;
+    --tacta-space-md:        12px;
+    --tacta-space-lg:        16px;
+    --tacta-space-xl:        24px;
+    --tacta-space-xxl:       32px;
+    --tacta-space-xxxl:      48px;
+
+    /* ── Border Radius ──────────────────────────────────────────── */
+    --tacta-radius-sm:       4px;
+    --tacta-radius-md:       6px;
+    --tacta-radius-lg:       8px;
+    --tacta-radius-xl:       12px;
+    --tacta-radius-full:     9999px;
+
+    /* ── Typography ─────────────────────────────────────────────── */
+    --tacta-font-family:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                             Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --tacta-font-mono:       "SF Mono", "Cascadia Code", "Fira Code", Consolas,
+                             "Courier New", monospace;
+    --tacta-font-size-xs:    11px;
+    --tacta-font-size-sm:    12px;
+    --tacta-font-size-md:    13px;
+    --tacta-font-size-lg:    15px;
+    --tacta-font-size-xl:    18px;
+    --tacta-font-size-xxl:   22px;
+    --tacta-line-height:     1.5;
+
+    /* ── Shadows ────────────────────────────────────────────────── */
+    --tacta-shadow-sm:       0 1px 3px rgba(0, 0, 0, 0.3);
+    --tacta-shadow-md:       0 4px 12px rgba(0, 0, 0, 0.4);
+    --tacta-shadow-lg:       0 8px 24px rgba(0, 0, 0, 0.5);
+    --tacta-shadow-xl:       0 12px 40px rgba(0, 0, 0, 0.6);
+    --tacta-shadow-glow:     0 0 12px rgba(118, 192, 67, 0.3);
+
+    /* ── Transitions ────────────────────────────────────────────── */
+    --tacta-transition-fast:    120ms ease;
+    --tacta-transition-normal:  200ms ease;
+    --tacta-transition-slow:    350ms ease;
+    --tacta-transition-slide:   300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ── Z-Index Layers ─────────────────────────────────────────── */
+    --tacta-z-base:          10000;
+    --tacta-z-panel:         10100;
+    --tacta-z-sidebar:       10200;
+    --tacta-z-modal:         10300;
+    --tacta-z-toast:         10400;
+    --tacta-z-tooltip:       10500;
+}
+
+/* ── Dark Scrollbar ─────────────────────────────────────────────── */
+
+.tacta-toolkit ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.tacta-toolkit ::-webkit-scrollbar-track {
+    background: var(--tacta-bg);
+    border-radius: var(--tacta-radius-full);
+}
+
+.tacta-toolkit ::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+    border: 2px solid var(--tacta-bg);
+}
+
+.tacta-toolkit ::-webkit-scrollbar-thumb:hover {
+    background: var(--tacta-text-muted);
+}
+
+.tacta-toolkit ::-webkit-scrollbar-corner {
+    background: var(--tacta-bg);
+}
+
+/* Firefox scrollbar */
+.tacta-toolkit {
+    scrollbar-width: thin;
+    scrollbar-color: var(--tacta-border-light) var(--tacta-bg);
+}

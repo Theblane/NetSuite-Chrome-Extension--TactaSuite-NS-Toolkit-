@@ -1,0 +1,99 @@
+/**
+ * fixed-headers.css
+ * NetSuite TactaSuite - Fixed Headers Styles
+ *
+ * @author Blane Maher
+ *
+ * Makes sublist / machine header rows sticky so they remain visible when
+ * scrolling long line-item lists on NetSuite record pages.
+ *
+ * Scoped via the .tacta-fh-sticky class applied by fixed-headers.js.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   STICKY HEADER ROW
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-fh-sticky {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2 !important;
+}
+
+/*
+ * Ensure cells in the sticky row have a solid background so page content
+ * does not bleed through when scrolling. NetSuite header rows use <td>
+ * elements, not <th>.
+ *
+ * We match the native NS sublist header background (#e9e9e9 in classic,
+ * slightly darker in the refreshed UI). Using a solid color avoids any
+ * transparency issues.
+ */
+.tacta-fh-sticky > td,
+.tacta-fh-sticky > th {
+    background-color: #d5dce3 !important;
+}
+
+/*
+ * Subtle bottom shadow on the pinned header so it is visually distinct
+ * from the content scrolling beneath it.
+ */
+.tacta-fh-sticky::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 4px;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.10),
+        transparent
+    );
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SCROLL CONTAINER TWEAKS
+   ════════════════════════════════════════════════════════════════════
+
+   The .uir-machine-table-container normally has `overflow: auto` which
+   creates the scroll context for position: sticky. We ensure this is
+   the case for any container we process.
+*/
+
+.tacta-fh-processed.uir-machine-table-container {
+    overflow: auto;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   REFRESHED UI VARIANT
+   ════════════════════════════════════════════════════════════════════
+
+   NetSuite's "Refreshed UI" (SuiteAnswer 93498) uses a slightly
+   different palette. Target headers inside .ns-refreshed-ui.
+*/
+
+.ns-refreshed-ui .tacta-fh-sticky > td,
+.ns-refreshed-ui .tacta-fh-sticky > th {
+    background-color: #e4ecf7 !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LIST / SEARCH RESULTS HEADERS
+   ════════════════════════════════════════════════════════════════════
+
+   On search result and list pages, header rows use .uir-list-headerrow.
+   These live in the main page scroll context (no wrapper div), so
+   sticky is relative to the viewport.
+*/
+
+tr.uir-list-headerrow.tacta-fh-sticky > td,
+tr.uir-list-headerrow.tacta-fh-sticky > th {
+    background-color: #d5dce3 !important;
+}
+
+.ns-refreshed-ui tr.uir-list-headerrow.tacta-fh-sticky > td,
+.ns-refreshed-ui tr.uir-list-headerrow.tacta-fh-sticky > th {
+    background-color: #e4ecf7 !important;
+}

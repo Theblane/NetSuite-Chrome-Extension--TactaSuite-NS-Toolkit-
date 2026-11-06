@@ -1,0 +1,105 @@
+/**
+ * audit-trail.css
+ * NetSuite TactaSuite - Audit Trail Panel Styles
+ *
+ * @author Blane Maher
+ */
+
+.tacta-audit {
+    font-family: var(--tacta-font-family);
+}
+
+.tacta-audit .tacta-panel-body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 4px;
+}
+
+/* ── Loading / error / empty ────────────────────────────────────── */
+
+.tacta-audit-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    color: var(--tacta-text-muted, #888);
+    font-size: 12px;
+}
+
+.tacta-audit-error {
+    padding: 10px 12px;
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    border-radius: var(--tacta-radius-md, 6px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.tacta-audit-empty {
+    padding: 20px 0;
+    text-align: center;
+    color: var(--tacta-text-muted, #888);
+    font-size: 13px;
+}
+
+/* ── Summary bar ────────────────────────────────────────────────── */
+
+.tacta-audit-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.tacta-audit-summary-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tacta-accent, #76c043);
+}
+
+.tacta-audit-summary-id {
+    font-size: 11px;
+    color: var(--tacta-text-muted, #888);
+}
+
+/* ── Search input ───────────────────────────────────────────────── */
+
+.tacta-audit-search {
+    width: 100%;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+/* ── Table wrapper ──────────────────────────────────────────────── */
+
+.tacta-audit-table-wrap {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* Compact table rows for dense data */
+.tacta-audit .tacta-table td,
+.tacta-audit .tacta-table th {
+    font-size: 11px;
+    padding: 4px 8px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* First column (Date) fixed-width */
+.tacta-audit .tacta-table td:first-child,
+.tacta-audit .tacta-table th:first-child {
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+/* Type column - badge-style coloring */
+.tacta-audit .tacta-table td:nth-child(2) {
+    color: var(--tacta-text-muted, #888);
+    font-style: italic;
+}

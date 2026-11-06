@@ -1,0 +1,148 @@
+/**
+ * pdf-tools.css
+ * NetSuite TactaSuite - PDF Template Tools Styles
+ *
+ * @author Blane Maher
+ */
+
+.tacta-pdf-tools-bar {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 9999;
+    display: flex;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--tacta-bg, #1a1a1a);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 12px;
+}
+
+.tacta-pdf-tools-bar button {
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--tacta-text-secondary, #ccc);
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+.tacta-pdf-tools-bar button:hover {
+    background: var(--tacta-bg-hover, #2a2a2a);
+    color: var(--tacta-text, #fff);
+}
+
+/* Tag Reference & Snippet panels */
+.tacta-pdf-panel-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+}
+
+.tacta-pdf-panel {
+    width: 520px;
+    max-height: 70vh;
+    background: var(--tacta-bg, #1a1a1a);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tacta-pdf-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--tacta-bg-elevated, #222);
+    border-bottom: 1px solid var(--tacta-border, #333);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--tacta-text, #fff);
+}
+
+.tacta-pdf-panel-close {
+    background: none;
+    border: none;
+    color: var(--tacta-text-muted, #888);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.tacta-pdf-panel-close:hover {
+    color: var(--tacta-text, #fff);
+}
+
+.tacta-pdf-panel-body {
+    padding: 12px 14px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.tacta-pdf-tag-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--tacta-border, #333);
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.tacta-pdf-tag-row:last-child {
+    border-bottom: none;
+}
+
+.tacta-pdf-tag-row:hover {
+    background: var(--tacta-bg-hover, #2a2a2a);
+}
+
+.tacta-pdf-tag-code {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 11px;
+    color: var(--tacta-accent, #76c043);
+    background: var(--tacta-bg-elevated, #222);
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    min-width: 180px;
+}
+
+.tacta-pdf-tag-desc {
+    font-size: 11px;
+    color: var(--tacta-text-muted, #888);
+}
+
+.tacta-pdf-snippet-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: var(--tacta-text-secondary, #ccc);
+    background: var(--tacta-bg-elevated, #222);
+    border: 1px solid var(--tacta-border, #333);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.tacta-pdf-snippet-btn:hover {
+    background: var(--tacta-bg-hover, #2a2a2a);
+    color: var(--tacta-accent, #76c043);
+}

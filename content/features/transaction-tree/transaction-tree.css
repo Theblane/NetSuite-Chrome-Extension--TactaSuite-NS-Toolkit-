@@ -1,0 +1,508 @@
+/**
+ * transaction-tree.css
+ * NetSuite TactaSuite — Transaction Tree (Styles)
+ *
+ * @author Blane Maher
+ *
+ * Styles for the floating transaction chain panel, tree layout with
+ * connecting lines, type-colored badges, status indicators, and the
+ * trigger badge button.
+ *
+ * Uses CSS custom properties from shared/theme-vars.css.
+ */
+
+/* ── Trigger Badge ─────────────────────────────────────────────── */
+
+.tacta-tt-badge {
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    z-index: var(--tacta-z-panel);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--tacta-bg);
+    color: var(--tacta-accent);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    font-family: var(--tacta-font-family);
+    font-size: var(--tacta-font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--tacta-shadow-md);
+    transition: all var(--tacta-transition-fast);
+    user-select: none;
+    line-height: 1;
+}
+
+.tacta-tt-badge:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-accent);
+    box-shadow: var(--tacta-shadow-glow);
+    transform: translateY(-1px);
+}
+
+.tacta-tt-badge:active {
+    transform: translateY(0);
+}
+
+.tacta-tt-badge-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.tacta-tt-badge-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    border-radius: var(--tacta-radius-full);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* ── Panel ─────────────────────────────────────────────────────── */
+
+.tacta-tt-panel {
+    position: fixed;
+    top: 70px;
+    right: 16px;
+    z-index: var(--tacta-z-panel);
+    width: 420px;
+    max-height: calc(100vh - 100px);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    box-shadow: var(--tacta-shadow-xl);
+    font-family: var(--tacta-font-family);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: tacta-tt-slide-in 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tacta-tt-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.tacta-tt-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+    background: var(--tacta-bg-elevated);
+}
+
+.tacta-tt-panel-title {
+    font-size: var(--tacta-font-size-lg);
+    font-weight: 700;
+    color: var(--tacta-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-tt-panel-title-icon {
+    color: var(--tacta-accent);
+}
+
+.tacta-tt-panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--tacta-radius-sm);
+    color: var(--tacta-text-muted);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all var(--tacta-transition-fast);
+    line-height: 1;
+}
+
+.tacta-tt-panel-close:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border);
+    color: var(--tacta-text);
+}
+
+.tacta-tt-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--tacta-border-light) var(--tacta-bg);
+}
+
+.tacta-tt-panel-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tacta-tt-panel-body::-webkit-scrollbar-track {
+    background: var(--tacta-bg);
+}
+
+.tacta-tt-panel-body::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+}
+
+/* ── Loading / Error States ────────────────────────────────────── */
+
+.tacta-tt-loading,
+.tacta-tt-error,
+.tacta-tt-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    text-align: center;
+    gap: 12px;
+}
+
+.tacta-tt-loading {
+    color: var(--tacta-text-muted);
+    font-size: var(--tacta-font-size-md);
+}
+
+.tacta-tt-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--tacta-border);
+    border-top-color: var(--tacta-accent);
+    border-radius: 50%;
+    animation: tacta-tt-spin 0.8s linear infinite;
+}
+
+@keyframes tacta-tt-spin {
+    to { transform: rotate(360deg); }
+}
+
+.tacta-tt-error {
+    color: var(--tacta-error);
+    font-size: var(--tacta-font-size-sm);
+}
+
+.tacta-tt-error-icon {
+    font-size: 24px;
+}
+
+.tacta-tt-empty {
+    color: var(--tacta-text-muted);
+    font-size: var(--tacta-font-size-sm);
+}
+
+/* ── Tree Layout ───────────────────────────────────────────────── */
+
+.tacta-tt-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+}
+
+.tacta-tt-node-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 20px;
+}
+
+.tacta-tt-node-group--root {
+    padding-left: 0;
+}
+
+/* Vertical connector line from parent to children */
+.tacta-tt-node-group:not(.tacta-tt-node-group--root)::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 20px;
+    width: 1px;
+    background: var(--tacta-border-light);
+}
+
+/* ── Node ──────────────────────────────────────────────────────── */
+
+.tacta-tt-node {
+    position: relative;
+    margin-bottom: 4px;
+}
+
+/* Horizontal connector line from vertical bar to node */
+.tacta-tt-node-group:not(.tacta-tt-node-group--root) > .tacta-tt-node::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 18px;
+    width: 12px;
+    height: 1px;
+    background: var(--tacta-border-light);
+}
+
+.tacta-tt-node-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+    transition: all var(--tacta-transition-fast);
+    text-decoration: none;
+    color: inherit;
+}
+
+.tacta-tt-node-card:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+    transform: translateX(2px);
+}
+
+.tacta-tt-node-card:active {
+    transform: translateX(0);
+}
+
+/* Current transaction highlight */
+.tacta-tt-node-card--current {
+    border-color: var(--tacta-accent);
+    box-shadow: 0 0 8px rgba(118, 192, 67, 0.2);
+    background: var(--tacta-accent-muted);
+}
+
+.tacta-tt-node-card--current:hover {
+    border-color: var(--tacta-accent-hover);
+    cursor: default;
+    transform: none;
+}
+
+/* ── Type Badge ────────────────────────────────────────────────── */
+
+.tacta-tt-type-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 24px;
+    padding: 0 6px;
+    border-radius: var(--tacta-radius-sm);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* Transaction type colors */
+.tacta-tt-type--SalesOrd   { background: rgba(52, 152, 219, 0.2);  color: #5dade2; }
+.tacta-tt-type--ItemFulfil { background: rgba(118, 192, 67, 0.2);  color: #76c043; }
+.tacta-tt-type--CustInvc   { background: rgba(243, 156, 18, 0.2);  color: #f5b041; }
+.tacta-tt-type--CustPymt   { background: rgba(155, 89, 182, 0.2);  color: #bb8fce; }
+.tacta-tt-type--CustCred   { background: rgba(231, 76, 60, 0.2);   color: #ec7063; }
+.tacta-tt-type--PurchOrd   { background: rgba(142, 68, 173, 0.2);  color: #af7ac5; }
+.tacta-tt-type--ItemRcpt   { background: rgba(26, 188, 156, 0.2);  color: #48c9b0; }
+.tacta-tt-type--VendBill   { background: rgba(211, 84, 0, 0.2);    color: #e67e22; }
+.tacta-tt-type--VendPymt   { background: rgba(241, 196, 15, 0.2);  color: #f4d03f; }
+.tacta-tt-type--RtnAuth    { background: rgba(220, 118, 51, 0.2);  color: #dc7633; }
+.tacta-tt-type--Estimate   { background: rgba(93, 173, 226, 0.2);  color: #85c1e9; }
+.tacta-tt-type--SalesOrd2  { background: rgba(52, 152, 219, 0.2);  color: #5dade2; }
+.tacta-tt-type--TrnfrOrd   { background: rgba(46, 134, 193, 0.2);  color: #5499c7; }
+.tacta-tt-type--WorkOrd    { background: rgba(125, 60, 152, 0.2);  color: #a569bd; }
+.tacta-tt-type--Journal    { background: rgba(149, 165, 166, 0.2); color: #aab7b8; }
+.tacta-tt-type--Deposit    { background: rgba(39, 174, 96, 0.2);   color: #58d68d; }
+.tacta-tt-type--CashSale   { background: rgba(34, 153, 84, 0.2);   color: #52be80; }
+.tacta-tt-type--CashRfnd   { background: rgba(192, 57, 43, 0.2);   color: #e74c3c; }
+.tacta-tt-type--default    { background: rgba(149, 165, 166, 0.2); color: #aab7b8; }
+
+/* ── Node Info ─────────────────────────────────────────────────── */
+
+.tacta-tt-node-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tacta-tt-node-tranid {
+    font-size: var(--tacta-font-size-md);
+    font-weight: 600;
+    color: var(--tacta-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tacta-tt-node-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-tt-node-entity {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Status Badge ──────────────────────────────────────────────── */
+
+.tacta-tt-status {
+    display: inline-flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: var(--tacta-radius-full);
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tacta-tt-status--open,
+.tacta-tt-status--pending {
+    background: var(--tacta-warning-bg);
+    color: var(--tacta-warning);
+}
+
+.tacta-tt-status--approved,
+.tacta-tt-status--fulfilled,
+.tacta-tt-status--paid,
+.tacta-tt-status--deposited,
+.tacta-tt-status--applied {
+    background: var(--tacta-success-bg);
+    color: var(--tacta-success);
+}
+
+.tacta-tt-status--closed,
+.tacta-tt-status--voided {
+    background: rgba(149, 165, 166, 0.15);
+    color: #95a5a6;
+}
+
+.tacta-tt-status--rejected,
+.tacta-tt-status--cancelled {
+    background: var(--tacta-error-bg);
+    color: var(--tacta-error);
+}
+
+.tacta-tt-status--partially {
+    background: var(--tacta-info-bg);
+    color: var(--tacta-info);
+}
+
+.tacta-tt-status--default {
+    background: rgba(149, 165, 166, 0.12);
+    color: #aab7b8;
+}
+
+/* ── Arrow / Direction Indicator ───────────────────────────────── */
+
+.tacta-tt-direction-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0 6px 0;
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tacta-tt-direction-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--tacta-border);
+}
+
+/* ── Current node marker ───────────────────────────────────────── */
+
+.tacta-tt-current-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 8px;
+    height: 8px;
+    background: var(--tacta-accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(118, 192, 67, 0.4);
+}
+
+/* ── Depth indicator ───────────────────────────────────────────── */
+
+.tacta-tt-depth-warn {
+    padding: 8px 12px;
+    margin-top: 4px;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ── Panel footer ──────────────────────────────────────────────── */
+
+.tacta-tt-panel-footer {
+    padding: 8px 16px;
+    border-top: 1px solid var(--tacta-border);
+    background: var(--tacta-bg-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-tt-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: transparent;
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-sm);
+    color: var(--tacta-text-secondary);
+    font-size: var(--tacta-font-size-xs);
+    font-family: var(--tacta-font-family);
+    cursor: pointer;
+    transition: all var(--tacta-transition-fast);
+}
+
+.tacta-tt-refresh-btn:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-accent);
+    color: var(--tacta-accent);
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+
+@media (max-width: 500px) {
+    .tacta-tt-panel {
+        width: calc(100vw - 32px);
+        right: 16px;
+    }
+}

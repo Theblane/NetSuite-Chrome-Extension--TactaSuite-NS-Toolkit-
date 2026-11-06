@@ -1,0 +1,34 @@
+/**
+ * instant-ui.css
+ * NetSuite TactaSuite - Instant UI (Styles)
+ *
+ * @author Blane Maher
+ *
+ * Injected into the DOCUMENT HEAD (it restyles the NetSuite page), so it must
+ * be listed in router.js globalStyles. Collapses every CSS transition on the
+ * page to 1ms and disables smooth scrolling while html has the
+ * tacta-instant-ui class.
+ *
+ * Keyframe animations are deliberately left alone. NetSuite's loading wheels
+ * and progress indicators are infinite keyframe animations; forcing them to
+ * 1ms made them cycle hundreds of times a second and show up as a flashing
+ * wheel on any page that fired a short request. Fade-ins and slide-ins in the
+ * NetSuite UI are transitions, so collapsing transitions alone keeps the
+ * interface instant without touching the spinners.
+ *
+ * Excluded: the toolkit shadow host (#tacta-toolkit-host) and any toolkit
+ * element rendered into the light DOM (class containing "tacta-"). Elements
+ * inside the shadow root are unaffected regardless because document styles
+ * do not cross the shadow boundary.
+ */
+
+html.tacta-instant-ui *:not(#tacta-toolkit-host):not(.tacta-toolkit):not(.tacta-toolkit *):not([class*="tacta-"]),
+html.tacta-instant-ui *:not(#tacta-toolkit-host):not(.tacta-toolkit):not(.tacta-toolkit *):not([class*="tacta-"])::before,
+html.tacta-instant-ui *:not(#tacta-toolkit-host):not(.tacta-toolkit):not(.tacta-toolkit *):not([class*="tacta-"])::after {
+    transition-duration: 1ms !important;
+    transition-delay: 0s !important;
+}
+
+html.tacta-instant-ui {
+    scroll-behavior: auto !important;
+}

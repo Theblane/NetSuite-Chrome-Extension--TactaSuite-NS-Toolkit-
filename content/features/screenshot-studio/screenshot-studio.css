@@ -1,0 +1,164 @@
+/**
+ * screenshot-studio.css
+ * NetSuite TactaSuite - Screenshot Studio Panel Styles (Shadow Root)
+ *
+ * @author Blane Maher
+ *
+ * Styles for the panel UI only. Rules that must reach NetSuite page text
+ * (mask bars, fixed-element neutralising, clean mode) live in
+ * screenshot-studio-page.css, which is injected into the document head.
+ */
+
+.tacta-shot {
+    font-family: var(--tacta-font-family);
+    max-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+}
+
+.tacta-shot .tacta-panel-body {
+    overflow-y: auto;
+    min-height: 0;
+    text-align: left;
+}
+
+/* ── Sections ───────────────────────────────────────────────────── */
+
+.tacta-shot-section {
+    padding: var(--tacta-space-sm) 0;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-shot-section:last-of-type {
+    border-bottom: none;
+}
+
+.tacta-shot-section-title {
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--tacta-text-muted);
+    margin-bottom: var(--tacta-space-xs);
+}
+
+.tacta-shot-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--tacta-space-sm) var(--tacta-space-lg);
+}
+
+.tacta-shot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--tacta-space-xs) var(--tacta-space-md);
+    margin: var(--tacta-space-xs) 0 var(--tacta-space-sm) 22px;
+}
+
+/* ── Checkboxes / radios ────────────────────────────────────────── */
+
+.tacta-shot-check,
+.tacta-shot-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.4;
+}
+
+.tacta-shot-check input,
+.tacta-shot-radio input {
+    margin: 0;
+    width: 14px;
+    height: 14px;
+    accent-color: var(--tacta-accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tacta-shot-check:hover,
+.tacta-shot-radio:hover {
+    color: var(--tacta-text);
+}
+
+.tacta-shot-check--master {
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-shot-mask-group.tacta-shot-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.tacta-shot-custom {
+    margin-left: 22px;
+    width: calc(100% - 22px);
+    font-size: var(--tacta-font-size-sm);
+}
+
+/* ── Capture row / status ───────────────────────────────────────── */
+
+.tacta-shot-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-md) 0 var(--tacta-space-sm);
+}
+
+.tacta-shot-status {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    line-height: 1.4;
+    min-height: 1.4em;
+}
+
+.tacta-shot-status--ok {
+    color: var(--tacta-success);
+}
+
+.tacta-shot-status--error {
+    color: var(--tacta-error);
+}
+
+/* ── Preview ────────────────────────────────────────────────────── */
+
+.tacta-shot-preview {
+    padding-top: var(--tacta-space-sm);
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-shot-preview-frame {
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border-light);
+    border-radius: var(--tacta-radius-md);
+    padding: var(--tacta-space-xs);
+    max-height: 320px;
+    overflow: auto;
+    margin-bottom: var(--tacta-space-sm);
+}
+
+.tacta-shot-preview-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--tacta-radius-sm);
+}
+
+.tacta-shot-preview-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--tacta-space-sm);
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    margin-bottom: var(--tacta-space-sm);
+}
+
+.tacta-shot-badge {
+    font-size: var(--tacta-font-size-xs);
+}

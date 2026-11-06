@@ -1,0 +1,848 @@
+/**
+ * options.css
+ * NetSuite TactaSuite — Options Page Stylesheet
+ *
+ * @author Blane Maher
+ *
+ * Full-page dark theme matching TactaSuite branding.
+ * Self-contained: includes all custom properties for independent rendering.
+ */
+
+/* ── CSS Custom Properties ────────────────────────────────────────── */
+
+:root {
+    --tacta-bg:              #f7f8fa;
+    --tacta-bg-elevated:     #ffffff;
+    --tacta-bg-hover:        #eef1f4;
+    --tacta-bg-active:       #e4e8ed;
+
+    --tacta-accent:          #76c043;
+    --tacta-accent-hover:    #8ad454;
+    --tacta-accent-active:   #65a738;
+    --tacta-accent-muted:    rgba(118, 192, 67, 0.15);
+
+    --tacta-text:            #17202a;
+    --tacta-text-secondary:  #3d4854;
+    --tacta-text-muted:      #66717d;
+    --tacta-text-inverse:    #ffffff;
+
+    --tacta-border:          #d7dde4;
+    --tacta-border-light:    #c3ccd6;
+    --tacta-border-focus:    #76c043;
+
+    --tacta-success:         #76c043;
+    --tacta-success-bg:      rgba(118, 192, 67, 0.12);
+    --tacta-error:           #e74c3c;
+    --tacta-error-bg:        rgba(231, 76, 60, 0.12);
+    --tacta-warning:         #f39c12;
+    --tacta-info:            #3498db;
+
+    --tacta-radius-sm:       4px;
+    --tacta-radius-md:       6px;
+    --tacta-radius-lg:       8px;
+    --tacta-radius-xl:       12px;
+    --tacta-radius-full:     9999px;
+
+    --tacta-font-family:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                             Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --tacta-font-mono:       "SF Mono", "Cascadia Code", "Fira Code", Consolas,
+                             "Courier New", monospace;
+
+    --tacta-shadow-sm:       0 1px 3px rgba(0, 0, 0, 0.3);
+    --tacta-shadow-md:       0 4px 12px rgba(0, 0, 0, 0.4);
+    --tacta-shadow-lg:       0 8px 24px rgba(0, 0, 0, 0.5);
+    --tacta-shadow-glow:     0 0 12px rgba(118, 192, 67, 0.3);
+
+    --tacta-transition-fast:    120ms ease;
+    --tacta-transition-normal:  200ms ease;
+    --tacta-transition-slow:    350ms ease;
+}
+
+
+/* ── Reset & Base ─────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background: var(--tacta-bg);
+    color: var(--tacta-text);
+    font-family: var(--tacta-font-family);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--tacta-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tacta-border-light);
+    border-radius: var(--tacta-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--tacta-text-muted);
+}
+
+
+/* ── Options Container ────────────────────────────────────────────── */
+
+.tacta-options {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+
+/* ── Header ───────────────────────────────────────────────────────── */
+
+.tacta-opt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--tacta-border);
+    margin-bottom: 32px;
+}
+
+.tacta-opt-header-left {
+    display: flex;
+    align-items: center;
+}
+
+.tacta-opt-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tacta-opt-logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    font-weight: 800;
+    font-size: 24px;
+    border-radius: var(--tacta-radius-lg);
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+}
+
+.tacta-opt-logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tacta-opt-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--tacta-text);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.tacta-opt-subtitle {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+    font-weight: 400;
+}
+
+
+/* ── Header Action Buttons ────────────────────────────────────────── */
+
+.tacta-opt-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tacta-opt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-family: var(--tacta-font-family);
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: var(--tacta-radius-md);
+    border: 1px solid var(--tacta-border);
+    cursor: pointer;
+    transition: all var(--tacta-transition-normal);
+    white-space: nowrap;
+}
+
+.tacta-opt-btn-secondary {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text-secondary);
+}
+
+.tacta-opt-btn-secondary:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+    color: var(--tacta-text);
+}
+
+.tacta-opt-btn-danger {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-error);
+    border-color: var(--tacta-border);
+}
+
+.tacta-opt-btn-danger:hover {
+    background: var(--tacta-error-bg);
+    border-color: var(--tacta-error);
+}
+
+
+/* ── Main Content ─────────────────────────────────────────────────── */
+
+.tacta-opt-main {
+    padding-bottom: 48px;
+}
+
+
+/* ── Sections ─────────────────────────────────────────────────────── */
+
+.tacta-opt-section {
+    margin-bottom: 40px;
+}
+
+.tacta-opt-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--tacta-text);
+    margin-bottom: 6px;
+}
+
+.tacta-opt-section-desc {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+    margin-bottom: 20px;
+}
+
+
+/* ── Feature List ─────────────────────────────────────────────────── */
+
+.tacta-opt-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* ── Feature Group Header ─────────────────────────────────────────── */
+
+.tacta-opt-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-group-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--tacta-accent);
+}
+
+.tacta-opt-group-count {
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+    font-weight: 400;
+}
+
+.tacta-opt-group-line {
+    flex: 1;
+    height: 1px;
+    background: var(--tacta-border);
+}
+
+
+/* ── Feature Cards ────────────────────────────────────────────────── */
+
+.tacta-opt-group-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 8px;
+}
+
+.tacta-opt-feature-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    transition: all var(--tacta-transition-normal);
+}
+
+.tacta-opt-feature-card:hover {
+    background: var(--tacta-bg-hover);
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-opt-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+}
+
+.tacta-opt-card-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tacta-opt-feature-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-opt-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--tacta-radius-full);
+    white-space: nowrap;
+}
+
+.tacta-opt-badge-group {
+    background: var(--tacta-bg-active);
+    color: var(--tacta-text-muted);
+}
+
+.tacta-opt-badge-default {
+    background: var(--tacta-accent-muted);
+    color: var(--tacta-accent);
+}
+
+.tacta-opt-feature-desc {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+}
+
+
+/* ── Toggle Switch (Options) ──────────────────────────────────────── */
+
+.tacta-opt-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.tacta-opt-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.tacta-opt-toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--tacta-bg-active);
+    border-radius: var(--tacta-radius-full);
+    cursor: pointer;
+    transition: background var(--tacta-transition-normal);
+    border: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background: var(--tacta-text-muted);
+    border-radius: 50%;
+    transition: transform var(--tacta-transition-normal),
+                background var(--tacta-transition-normal),
+                box-shadow var(--tacta-transition-normal);
+}
+
+.tacta-opt-toggle input:checked + .tacta-opt-toggle-track {
+    background: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+}
+
+.tacta-opt-toggle input:checked + .tacta-opt-toggle-track::after {
+    transform: translateX(20px);
+    background: var(--tacta-text);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.tacta-opt-toggle input:focus-visible + .tacta-opt-toggle-track {
+    outline: 2px solid var(--tacta-accent);
+    outline-offset: 2px;
+}
+
+
+/* ── Settings Form (SuiteQL Runner) ──────────────────────────────── */
+
+.tacta-opt-settings-form {
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    overflow: hidden;
+}
+
+.tacta-opt-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-setting-row:last-child {
+    border-bottom: none;
+}
+
+.tacta-opt-setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.tacta-opt-setting-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tacta-text);
+    cursor: default;
+}
+
+.tacta-opt-setting-hint {
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-opt-input {
+    width: 140px;
+    padding: 7px 10px;
+    font-family: var(--tacta-font-mono);
+    font-size: 13px;
+    color: var(--tacta-text);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    outline: none;
+    transition: border-color var(--tacta-transition-normal),
+                box-shadow var(--tacta-transition-normal);
+    -moz-appearance: textfield;
+}
+
+.tacta-opt-color-input {
+    width: 48px;
+    height: 36px;
+    padding: 2px;
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+    cursor: pointer;
+}
+
+.tacta-opt-color-input::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.tacta-opt-color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+.tacta-opt-input::-webkit-outer-spin-button,
+.tacta-opt-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tacta-opt-input:focus {
+    border-color: var(--tacta-border-focus);
+    box-shadow: 0 0 0 2px var(--tacta-accent-muted);
+}
+
+.tacta-opt-input::placeholder {
+    color: var(--tacta-text-muted);
+    opacity: 0.6;
+}
+
+.tacta-opt-setting-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-btn-primary {
+    background: var(--tacta-accent);
+    color: var(--tacta-text-inverse);
+    border-color: var(--tacta-accent);
+}
+
+.tacta-opt-btn-primary:hover {
+    background: var(--tacta-accent-hover);
+    border-color: var(--tacta-accent-hover);
+    box-shadow: var(--tacta-shadow-glow);
+}
+
+.tacta-opt-btn-primary:active {
+    background: var(--tacta-accent-active);
+    border-color: var(--tacta-accent-active);
+}
+
+
+/* ── About Section ────────────────────────────────────────────────── */
+
+.tacta-opt-about-content {
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-lg);
+    overflow: hidden;
+}
+
+.tacta-opt-about-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-about-row:last-child {
+    border-bottom: none;
+}
+
+.tacta-opt-about-label {
+    font-size: 13px;
+    color: var(--tacta-text-muted);
+    font-weight: 500;
+}
+
+.tacta-opt-about-value {
+    font-size: 13px;
+    color: var(--tacta-text);
+    font-weight: 500;
+    text-align: right;
+}
+
+.tacta-opt-mono {
+    font-family: var(--tacta-font-mono);
+}
+
+
+/* ── Footer ───────────────────────────────────────────────────────── */
+
+.tacta-opt-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-top: 1px solid var(--tacta-border);
+}
+
+.tacta-opt-footer-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tacta-text-muted);
+    letter-spacing: 0.3px;
+}
+
+.tacta-opt-footer-version {
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+    font-family: var(--tacta-font-mono);
+}
+
+
+/* ── Toast Notification ───────────────────────────────────────────── */
+
+.tacta-opt-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 10px 20px;
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text);
+    border: 1px solid var(--tacta-border-light);
+    border-radius: var(--tacta-radius-lg);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--tacta-shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--tacta-transition-slow);
+    z-index: 1000;
+}
+
+.tacta-opt-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tacta-opt-toast.success {
+    border-color: var(--tacta-accent);
+}
+
+.tacta-opt-toast.error {
+    border-color: var(--tacta-error);
+}
+
+
+/* ── Responsive ───────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+    .tacta-opt-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tacta-opt-header-actions {
+        width: 100%;
+    }
+
+    .tacta-opt-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .tacta-opt-feature-card {
+        padding: 12px;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   FORM CONTROLS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-opt-select {
+    width: 320px;
+    padding: 8px 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    color: var(--tacta-text);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: 6px;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2366717d' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+    cursor: pointer;
+    transition: border-color 120ms ease;
+}
+
+.tacta-opt-select:hover {
+    border-color: var(--tacta-border-light);
+}
+
+.tacta-opt-select:focus {
+    border-color: #76c043;
+    box-shadow: 0 0 0 3px rgba(118, 192, 67, 0.15);
+}
+
+.tacta-opt-select option {
+    background: var(--tacta-bg-elevated);
+    color: var(--tacta-text);
+}
+
+.tacta-opt-btn-sm {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.tacta-opt-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--tacta-border);
+    border-top-color: #76c043;
+    border-radius: 50%;
+    animation: tacta-opt-spin 0.7s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes tacta-opt-spin {
+    to { transform: rotate(360deg); }
+}
+
+.tacta-opt-section-desc a {
+    color: #76c043;
+    text-decoration: none;
+}
+
+.tacta-opt-section-desc a:hover {
+    text-decoration: underline;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   QUICK SEARCH SETTINGS
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-opt-qsc-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.tacta-opt-qsc-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tacta-opt-qsc-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tacta-opt-qsc-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+}
+
+.tacta-opt-qsc-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #ccc;
+    padding: 3px 0;
+    user-select: none;
+    transition: color 120ms ease;
+    min-width: 140px;
+}
+
+.tacta-opt-qsc-item:hover {
+    color: var(--tacta-text);
+}
+
+.tacta-opt-qsc-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #76c043;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ── Author / support links (shared/author-links.js) ───────────── */
+
+.tacta-author-name {
+    font-weight: 600;
+    color: var(--tacta-text);
+}
+
+.tacta-author-prefix {
+    font-weight: 400;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-role {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.tacta-author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--tacta-text-secondary);
+    background: var(--tacta-bg);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-full);
+    text-decoration: none;
+}
+
+.tacta-author-link:hover {
+    color: var(--tacta-accent);
+    border-color: var(--tacta-accent);
+    background: var(--tacta-accent-muted);
+}
+
+.tacta-author--compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tacta-author--compact .tacta-author-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--tacta-text-muted);
+}
+
+.tacta-author--compact .tacta-author-links {
+    margin-top: 0;
+    gap: 4px;
+}
+
+.tacta-author--compact .tacta-author-link {
+    padding: 3px;
+    border-radius: var(--tacta-radius-sm);
+}
+
+.tacta-opt-about-row-author {
+    align-items: flex-start;
+}

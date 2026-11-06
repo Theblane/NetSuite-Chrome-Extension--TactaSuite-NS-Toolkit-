@@ -1,0 +1,312 @@
+/**
+ * field-help.css
+ * NetSuite TactaSuite — Field Help Tooltip Styles
+ *
+ * @author Blane Maher
+ *
+ * All rules scoped under .tacta-field-help to avoid NetSuite collisions.
+ * Uses CSS custom properties from theme-vars.css (--tacta-*).
+ */
+
+/* ── Tooltip Container ─────────────────────────────────────────────── */
+
+.tacta-field-help-tooltip {
+    position: absolute;
+    z-index: var(--tacta-z-tooltip, 10500);
+    min-width: 320px;
+    max-width: 420px;
+    background: var(--tacta-bg-elevated, #222222);
+    border: 1px solid var(--tacta-border, #333333);
+    border-radius: var(--tacta-radius-lg, 8px);
+    box-shadow: var(--tacta-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.5));
+    font-family: var(--tacta-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: var(--tacta-font-size-sm, 12px);
+    line-height: var(--tacta-line-height, 1.5);
+    color: var(--tacta-text, #ffffff);
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity var(--tacta-transition-fast, 120ms ease),
+                transform var(--tacta-transition-fast, 120ms ease);
+}
+
+.tacta-field-help-tooltip.tacta-field-help--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Arrow / Pointer ───────────────────────────────────────────────── */
+
+.tacta-field-help-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--tacta-bg-elevated, #222222);
+    border-top: 1px solid var(--tacta-border, #333333);
+    border-left: 1px solid var(--tacta-border, #333333);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.tacta-field-help-tooltip.tacta-field-help--arrow-right::before {
+    left: auto;
+    right: 20px;
+}
+
+.tacta-field-help-tooltip.tacta-field-help--above::before {
+    top: auto;
+    bottom: -6px;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid var(--tacta-border, #333333);
+    border-right: 1px solid var(--tacta-border, #333333);
+}
+
+/* ── Header ────────────────────────────────────────────────────────── */
+
+.tacta-field-help__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+    border-bottom: 1px solid var(--tacta-border, #333333);
+}
+
+.tacta-field-help__title {
+    font-size: var(--tacta-font-size-md, 13px);
+    font-weight: 600;
+    color: var(--tacta-text, #ffffff);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
+.tacta-field-help__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: transparent;
+    color: var(--tacta-text-muted, #888888);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: var(--tacta-radius-sm, 4px);
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color var(--tacta-transition-fast, 120ms ease),
+                background var(--tacta-transition-fast, 120ms ease);
+}
+
+.tacta-field-help__close:hover {
+    color: var(--tacta-text, #ffffff);
+    background: var(--tacta-bg-active, #333333);
+}
+
+/* ── Body ──────────────────────────────────────────────────────────── */
+
+.tacta-field-help__body {
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+}
+
+/* ── Metadata Row ──────────────────────────────────────────────────── */
+
+.tacta-field-help__row {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--tacta-space-xxs, 2px) 0;
+    gap: var(--tacta-space-sm, 8px);
+}
+
+.tacta-field-help__row + .tacta-field-help__row {
+    border-top: 1px solid rgba(51, 51, 51, 0.5);
+    padding-top: var(--tacta-space-xs, 4px);
+    margin-top: var(--tacta-space-xxs, 2px);
+}
+
+.tacta-field-help__label {
+    flex: 0 0 90px;
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-muted, #888888);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 1px;
+}
+
+.tacta-field-help__value {
+    flex: 1;
+    font-size: var(--tacta-font-size-sm, 12px);
+    color: var(--tacta-text-secondary, #cccccc);
+    word-break: break-word;
+}
+
+/* ── Field ID (monospace, green accent) ────────────────────────────── */
+
+.tacta-field-help__field-id {
+    font-family: var(--tacta-font-mono, "SF Mono", "Cascadia Code", Consolas, monospace);
+    font-size: var(--tacta-font-size-sm, 12px);
+    color: var(--tacta-accent, #76c043);
+    background: var(--tacta-accent-muted, rgba(118, 192, 67, 0.15));
+    padding: 1px 6px;
+    border-radius: var(--tacta-radius-sm, 4px);
+    cursor: pointer;
+    user-select: all;
+    transition: background var(--tacta-transition-fast, 120ms ease);
+    display: inline-block;
+}
+
+.tacta-field-help__field-id:hover {
+    background: rgba(118, 192, 67, 0.25);
+}
+
+/* ── Badge pills ───────────────────────────────────────────────────── */
+
+.tacta-field-help__badge {
+    display: inline-block;
+    font-size: var(--tacta-font-size-xs, 11px);
+    padding: 1px 6px;
+    border-radius: var(--tacta-radius-full, 9999px);
+    font-weight: 500;
+}
+
+.tacta-field-help__badge--type {
+    background: var(--tacta-info-bg, rgba(52, 152, 219, 0.12));
+    color: var(--tacta-info, #3498db);
+}
+
+.tacta-field-help__badge--mandatory {
+    background: var(--tacta-error-bg, rgba(231, 76, 60, 0.12));
+    color: var(--tacta-error, #e74c3c);
+}
+
+.tacta-field-help__badge--stored {
+    background: var(--tacta-success-bg, rgba(118, 192, 67, 0.12));
+    color: var(--tacta-success, #76c043);
+}
+
+.tacta-field-help__badge--display {
+    background: var(--tacta-warning-bg, rgba(243, 156, 18, 0.12));
+    color: var(--tacta-warning, #f39c12);
+}
+
+.tacta-field-help__badge--unknown {
+    background: rgba(136, 136, 136, 0.12);
+    color: var(--tacta-text-muted, #888888);
+}
+
+/* ── Divider ───────────────────────────────────────────────────────── */
+
+.tacta-field-help__divider {
+    height: 1px;
+    background: var(--tacta-border, #333333);
+    margin: var(--tacta-space-sm, 8px) 0;
+    border: none;
+}
+
+/* ── Copy Buttons ──────────────────────────────────────────────────── */
+
+.tacta-field-help__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tacta-space-xs, 4px);
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+    border-top: 1px solid var(--tacta-border, #333333);
+}
+
+.tacta-field-help__copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--tacta-space-xxs, 2px);
+    padding: var(--tacta-space-xxs, 2px) var(--tacta-space-sm, 8px);
+    border: 1px solid var(--tacta-border, #333333);
+    border-radius: var(--tacta-radius-sm, 4px);
+    background: var(--tacta-bg, #1a1a1a);
+    color: var(--tacta-accent, #76c043);
+    font-family: var(--tacta-font-mono, "SF Mono", "Cascadia Code", Consolas, monospace);
+    font-size: var(--tacta-font-size-xs, 11px);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--tacta-transition-fast, 120ms ease);
+    line-height: 1.6;
+}
+
+.tacta-field-help__copy-btn:hover {
+    background: var(--tacta-accent-muted, rgba(118, 192, 67, 0.15));
+    border-color: var(--tacta-accent, #76c043);
+    color: var(--tacta-accent-hover, #8ad454);
+}
+
+.tacta-field-help__copy-btn.tacta-field-help__copy-btn--copied {
+    background: var(--tacta-success-bg, rgba(118, 192, 67, 0.12));
+    border-color: var(--tacta-accent, #76c043);
+    color: var(--tacta-accent, #76c043);
+}
+
+.tacta-field-help__copy-icon {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* ── Source info ────────────────────────────────────────────────────── */
+
+.tacta-field-help__source {
+    font-family: var(--tacta-font-mono, "SF Mono", "Cascadia Code", Consolas, monospace);
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-info, #3498db);
+}
+
+/* ── Current Value Preview ─────────────────────────────────────────── */
+
+.tacta-field-help__current-value {
+    font-family: var(--tacta-font-mono, "SF Mono", "Cascadia Code", Consolas, monospace);
+    font-size: var(--tacta-font-size-xs, 11px);
+    color: var(--tacta-text-secondary, #cccccc);
+    background: var(--tacta-bg, #1a1a1a);
+    padding: 2px 6px;
+    border-radius: var(--tacta-radius-sm, 4px);
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* ── Loading state ─────────────────────────────────────────────────── */
+
+.tacta-field-help__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--tacta-space-lg, 16px);
+    color: var(--tacta-text-muted, #888888);
+    font-size: var(--tacta-font-size-sm, 12px);
+    gap: var(--tacta-space-sm, 8px);
+}
+
+.tacta-field-help__spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--tacta-border, #333333);
+    border-top-color: var(--tacta-accent, #76c043);
+    border-radius: 50%;
+    animation: tacta-fh-spin 0.6s linear infinite;
+}
+
+@keyframes tacta-fh-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Error state ───────────────────────────────────────────────────── */
+
+.tacta-field-help__error {
+    padding: var(--tacta-space-sm, 8px) var(--tacta-space-md, 12px);
+    color: var(--tacta-error, #e74c3c);
+    font-size: var(--tacta-font-size-sm, 12px);
+}

@@ -1,0 +1,19 @@
+{
+  "name": "tactasuite-ns-toolkit",
+  "version": "1.7.0",
+  "description": "Unified NetSuite developer toolkit",
+  "private": true,
+  "scripts": {
+    "test": "playwright test tests/field-explorer-pageworld.test.ts",
+    "check:pages": "node tests/extension-pages.check.mjs",
+    "check:sw": "node tests/sw-import.check.mjs",
+    "check:bridge": "node tests/bridge.check.mjs",
+    "build:zip": "node scripts/build-zip.cjs",
+    "verify": "npm test && npm run check:sw && npm run check:pages && npm run check:bridge",
+    "build:icons": "node scripts/build-icons.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.38.0",
+    "playwright": "^1.38.0"
+  }
+}

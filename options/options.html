@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TactaSuite NS Toolkit - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="tacta-options">
+
+        <!-- ── Header ─────────────────────────────────────────────── -->
+        <header class="tacta-opt-header">
+            <div class="tacta-opt-header-left">
+                <div class="tacta-opt-logo">
+                    <span class="tacta-opt-logo-mark">T</span>
+                    <div class="tacta-opt-logo-text">
+                        <span class="tacta-opt-title">TactaSuite</span>
+                        <span class="tacta-opt-subtitle">Settings</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tacta-opt-header-actions">
+                <button class="tacta-opt-btn tacta-opt-btn-secondary" id="importBtn" title="Import settings from JSON file">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 11v2.5h12V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Import
+                </button>
+                <button class="tacta-opt-btn tacta-opt-btn-secondary" id="exportBtn" title="Export all settings as JSON file">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 11v2.5h12V11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 10V2M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Export
+                </button>
+                <button class="tacta-opt-btn tacta-opt-btn-danger" id="resetBtn" title="Reset all features to default states">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 2v5h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 9.5a6 6 0 1 0 1.3-4L2 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Reset to Defaults
+                </button>
+            </div>
+        </header>
+
+        <!-- ── Feature Management ─────────────────────────────────── -->
+        <main class="tacta-opt-main">
+            <section class="tacta-opt-section">
+                <h2 class="tacta-opt-section-title">Feature Management</h2>
+                <p class="tacta-opt-section-desc">
+                    Enable or disable individual features. Changes take effect immediately on open NetSuite tabs.
+                </p>
+                <div id="featureList" class="tacta-opt-feature-list"></div>
+            </section>
+
+
+            <!-- ── General Settings ───────────────────────────────────── -->
+            <section class="tacta-opt-section">
+                <h2 class="tacta-opt-section-title">General Settings</h2>
+                <div class="tacta-opt-settings-form">
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="userTypeSelect">I am a</label>
+                            <span class="tacta-opt-setting-hint">User is the default preset; Developer turns on every tool. Toggling any feature above switches you to Custom. Export (top right) saves a Custom setup to share or back up.</span>
+                        </div>
+                        <select id="userTypeSelect" class="tacta-opt-select">
+                            <option value="user">User</option>
+                            <option value="developer">Developer</option>
+                            <option value="custom" disabled>Custom</option>
+                        </select>
+                    </div>
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <span class="tacta-opt-setting-label">Setup walkthrough</span>
+                            <span class="tacta-opt-setting-hint">Re-run the guided tour that explains each feature and lets you turn them on or off a few at a time.</span>
+                        </div>
+                        <button class="tacta-opt-btn tacta-opt-btn-secondary" id="runWalkthroughBtn" type="button">Open walkthrough</button>
+                    </div>
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="closeOnClickOutside">Click outside panel to close</label>
+                            <span class="tacta-opt-setting-hint">When enabled, clicking outside a floating panel (Field Explorer, etc.) will close it. When disabled, you must click the X button.</span>
+                        </div>
+                        <label class="tacta-opt-toggle">
+                            <input type="checkbox" id="closeOnClickOutside">
+                            <span class="tacta-opt-toggle-track"></span>
+                        </label>
+                    </div>
+                    <div class="tacta-opt-setting-actions">
+                        <button class="tacta-opt-btn tacta-opt-btn-primary" id="saveGeneralSettings">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-9A1.5 1.5 0 0 1 3.5 2H11l3 3v7.5a1.5 1.5 0 0 1-1.5 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 14V9H5v5M5 2v3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Quick Search Settings ─────────────────────────────── -->
+            <section class="tacta-opt-section">
+                <h2 class="tacta-opt-section-title">Quick Search Settings</h2>
+                <p class="tacta-opt-section-desc">
+                    Choose which search types appear in the Quick Search toolbar on search pages and the dashboard.
+                </p>
+                <div class="tacta-opt-settings-form">
+                    <div id="qscTypeGroups" class="tacta-opt-qsc-groups"></div>
+                    <div class="tacta-opt-setting-actions">
+                        <button class="tacta-opt-btn tacta-opt-btn-secondary" id="qscSelectAll" type="button">Select All</button>
+                        <button class="tacta-opt-btn tacta-opt-btn-secondary" id="qscSelectNone" type="button">Select None</button>
+                        <button class="tacta-opt-btn tacta-opt-btn-primary" id="saveQscSettings" type="button">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-9A1.5 1.5 0 0 1 3.5 2H11l3 3v7.5a1.5 1.5 0 0 1-1.5 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 14V9H5v5M5 2v3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Save Search Types
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Theme Settings -->
+            <section class="tacta-opt-section">
+                <h2 class="tacta-opt-section-title">Theme Settings</h2>
+                <p class="tacta-opt-section-desc">
+                    Choose the color scheme used by the toolkit popup, settings page, and injected NetSuite panels.
+                </p>
+                <div class="tacta-opt-settings-form">
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="themeScheme">Color Scheme</label>
+                            <span class="tacta-opt-setting-hint">Controls the base surface, text, and border colors.</span>
+                        </div>
+                        <select id="themeScheme" class="tacta-opt-select">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="contrast">High Contrast</option>
+                        </select>
+                    </div>
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="themeAccent">Accent Color</label>
+                            <span class="tacta-opt-setting-hint">Used for buttons, toggles, highlights, and focus rings.</span>
+                        </div>
+                        <input type="color" id="themeAccent" class="tacta-opt-color-input" value="#76c043">
+                    </div>
+                    <div class="tacta-opt-setting-actions">
+                        <button class="tacta-opt-btn tacta-opt-btn-primary" id="saveThemeSettings" type="button">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-9A1.5 1.5 0 0 1 3.5 2H11l3 3v7.5a1.5 1.5 0 0 1-1.5 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 14V9H5v5M5 2v3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Save Theme
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Account Color Settings ──────────────────────────── -->
+            <section class="tacta-opt-section tacta-opt-account-color-settings">
+                <h2 class="tacta-opt-section-title">Account Color Settings</h2>
+                <p class="tacta-opt-section-desc">
+                    Customize the header bar color per environment. Click a swatch to pick a color.
+                </p>
+                <div class="tacta-opt-settings-form">
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="acColorProd">Production</label>
+                            <span class="tacta-opt-setting-hint">Color for production accounts</span>
+                        </div>
+                        <input type="color" id="acColorProd" class="tacta-opt-color-input" value="#ff4444">
+                    </div>
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="acColorSandbox">Sandbox</label>
+                            <span class="tacta-opt-setting-hint">Color for primary sandbox</span>
+                        </div>
+                        <input type="color" id="acColorSandbox" class="tacta-opt-color-input" value="#76c043">
+                    </div>
+                    <div class="tacta-opt-setting-row">
+                        <div class="tacta-opt-setting-info">
+                            <label class="tacta-opt-setting-label" for="acColorSandboxN">Sandbox 2+</label>
+                            <span class="tacta-opt-setting-hint">Color for additional sandboxes</span>
+                        </div>
+                        <input type="color" id="acColorSandboxN" class="tacta-opt-color-input" value="#4488ff">
+                    </div>
+                    <div class="tacta-opt-setting-actions">
+                        <button class="tacta-opt-btn tacta-opt-btn-primary" id="saveAccountColorSettings">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-9A1.5 1.5 0 0 1 3.5 2H11l3 3v7.5a1.5 1.5 0 0 1-1.5 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 14V9H5v5M5 2v3h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Save Colors
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── Claude Desktop Bridge (beta feature, off by default) ── -->
+            <section class="tacta-opt-section" id="bridge">
+                <h2 class="tacta-opt-section-title">Claude Desktop Bridge <span class="tacta-opt-badge tacta-opt-badge-beta">Beta feature</span></h2>
+                <p class="tacta-opt-section-desc">
+                    Let the Claude Desktop app read from the NetSuite account you already
+                    have open in Chrome. You can ask Claude questions in plain English,
+                    for example "which sales orders shipped late this month", and it
+                    looks up the answer in your NetSuite tab, as you, with your role and
+                    permissions. Nothing to install in NetSuite, no admin needed.
+                </p>
+                <p class="tacta-opt-section-desc">
+                    It works through a small helper program called the <strong>companion</strong>
+                    that runs on your PC. Claude Desktop starts it and stops it for you.
+                    The companion and this extension only talk to each other on your own
+                    computer; nothing is sent to the author or to any website. It is
+                    <strong>read only by default</strong>; Claude can change data only when you
+                    lock onto a single account and explicitly turn on <strong>Allow writes</strong> for it.
+                    It is off until you switch it on, and you can switch it off at any time.
+                    This is a beta feature, so expect rough edges and read the questions
+                    and answers at the bottom of this section before using it with real data.
+                </p>
+                <div id="bridgeCard" class="tacta-opt-bridge">
+                    <p class="tacta-opt-bridge-loading">Loading bridge status…</p>
+                </div>
+            </section>
+
+            <!-- ── About ──────────────────────────────────────────── -->
+            <section class="tacta-opt-section tacta-opt-about">
+                <h2 class="tacta-opt-section-title">About</h2>
+                <div class="tacta-opt-about-content">
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Extension</span>
+                        <span class="tacta-opt-about-value">TactaSuite NS Toolkit</span>
+                    </div>
+                    <div class="tacta-opt-about-row tacta-opt-about-row-author">
+                        <span class="tacta-opt-about-label">Author</span>
+                        <div class="tacta-opt-about-value" id="authorMount">Blane Maher</div>
+                    </div>
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Version</span>
+                        <span class="tacta-opt-about-value tacta-opt-mono">v1.7.0</span>
+                    </div>
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Features</span>
+                        <span class="tacta-opt-about-value" id="featureTotal">—</span>
+                    </div>
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Runtime</span>
+                        <span class="tacta-opt-about-value">Chrome Extension Manifest V3</span>
+                    </div>
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Target</span>
+                        <span class="tacta-opt-about-value">NetSuite (*.netsuite.com)</span>
+                    </div>
+                    <div class="tacta-opt-about-row">
+                        <span class="tacta-opt-about-label">Feedback</span>
+                        <span class="tacta-opt-about-value">
+                            <button type="button" class="tacta-opt-btn tacta-opt-btn-secondary" data-tacta-feedback="bug">Report a problem</button>
+                            <button type="button" class="tacta-opt-btn tacta-opt-btn-secondary" data-tacta-feedback="idea">Suggest an idea</button>
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ── Footer ─────────────────────────────────────────────── -->
+        <footer class="tacta-opt-footer">
+            <span class="tacta-opt-footer-brand">TactaSuite NS Toolkit</span>
+            <span class="tacta-opt-footer-version">v1.7.0</span>
+        </footer>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+
+    <script src="../shared/theme-manager.js"></script>
+    <script src="../shared/author-links.js"></script>
+    <script src="../shared/feedback.js"></script>
+    <script src="../shared/user-types.js"></script>
+    <script src="../shared/settings-export.js"></script>
+    <script src="../shared/bridge-settings-ui.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>

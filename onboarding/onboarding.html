@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+  TactaSuite NS Toolkit - Onboarding Walkthrough
+  @author Blane Maher
+
+  Extension page opened on first install (service worker) and from the
+  popup / options "Walkthrough" links. Re-runnable at any time.
+  Deep links: ?step=features  (also welcome, usertype, appearance, done)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TactaSuite NS Toolkit - Welcome</title>
+    <link rel="stylesheet" href="../shared/theme-vars.css">
+    <link rel="stylesheet" href="onboarding.css">
+</head>
+<body class="tacta-toolkit">
+    <div class="tacta-ob">
+
+        <!-- Header -->
+        <header class="tacta-ob-header">
+            <div class="tacta-ob-logo">
+                <span class="tacta-ob-logo-mark">T</span>
+                <div class="tacta-ob-logo-text">
+                    <span class="tacta-ob-title" id="obExtName">TactaSuite NS Toolkit</span>
+                    <span class="tacta-ob-subtitle">Setup walkthrough <span class="tacta-ob-version" id="obVersion"></span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress -->
+        <nav class="tacta-ob-progress" aria-label="Walkthrough progress">
+            <div class="tacta-ob-progress-meta">
+                <span class="tacta-ob-progress-counter" id="obProgressCounter">Step 1 of 1</span>
+                <span class="tacta-ob-progress-label" id="obProgressLabel"></span>
+            </div>
+            <div class="tacta-ob-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="obProgressBar">
+                <div class="tacta-ob-progress-fill" id="obProgressFill"></div>
+            </div>
+            <ol class="tacta-ob-milestones" id="obMilestones"></ol>
+        </nav>
+
+        <!-- Step container (steps are rendered by onboarding.js) -->
+        <main class="tacta-ob-main" id="obMain" aria-live="polite">
+            <section class="tacta-ob-step" id="obStep"></section>
+        </main>
+
+        <!-- Footer navigation -->
+        <footer class="tacta-ob-footer">
+            <div class="tacta-ob-footer-left">
+                <button type="button" class="tacta-ob-btn tacta-ob-btn-secondary" id="obBackBtn">Back</button>
+            </div>
+            <div class="tacta-ob-footer-right">
+                <button type="button" class="tacta-ob-btn tacta-ob-btn-link" id="obSkipBtn">Skip to end</button>
+                <button type="button" class="tacta-ob-btn tacta-ob-btn-primary" id="obNextBtn">Next</button>
+            </div>
+        </footer>
+
+        <div class="tacta-ob-toast" id="obToast" role="status" aria-live="polite" hidden></div>
+    </div>
+
+    <script src="../shared/theme-manager.js"></script>
+    <script src="../shared/author-links.js"></script>
+    <script src="../shared/user-types.js"></script>
+    <script src="onboarding.js"></script>
+</body>
+</html>

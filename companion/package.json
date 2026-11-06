@@ -1,0 +1,15 @@
+{
+  "name": "tacta-netsuite-bridge",
+  "version": "1.2.0",
+  "description": "Local companion that bridges a desktop MCP client to a live NetSuite session via the NetSuite TactaSuite Chrome extension. Zero dependencies.",
+  "type": "module",
+  "bin": {
+    "tacta-bridge": "tacta-bridge.mjs"
+  },
+  "main": "tacta-bridge.mjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "Blane Maher",
+  "private": true
+}

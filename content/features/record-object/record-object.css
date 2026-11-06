@@ -1,0 +1,322 @@
+/**
+ * record-object.css
+ * NetSuite TactaSuite - Record Object Viewer Styles
+ *
+ * @author Blane Maher
+ *
+ * Scoped under .tacta-record-object to avoid collisions.
+ * Uses CSS custom properties from theme-vars.css.
+ */
+
+/* ════════════════════════════════════════════════════════════════════
+   PANEL BODY LAYOUT
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TOOLBAR (SEARCH + ACTIONS)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tacta-space-sm);
+    padding: var(--tacta-space-md);
+    border-bottom: 1px solid var(--tacta-border);
+    flex-shrink: 0;
+}
+
+.tacta-record-object .tacta-record-object-search {
+    width: 100%;
+    padding-left: 36px;
+    font-family: var(--tacta-font-family);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888888' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM6.5 11a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.tacta-record-object .tacta-record-object-actions {
+    display: flex;
+    gap: var(--tacta-space-sm);
+}
+
+.tacta-record-object .tacta-record-object-actions .tacta-btn {
+    flex: 1;
+    font-size: var(--tacta-font-size-xs);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   TREE HOST (scrollable area)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-tree-host {
+    flex: 1;
+    overflow: auto;
+    padding: var(--tacta-space-md);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SUMMARY BAR
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-summary {
+    display: flex;
+    gap: var(--tacta-space-sm);
+    padding-bottom: var(--tacta-space-md);
+    border-bottom: 1px solid var(--tacta-border);
+    margin-bottom: var(--tacta-space-md);
+}
+
+.tacta-record-object .tacta-record-object-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--tacta-space-xxs);
+    padding: var(--tacta-space-sm);
+    background: var(--tacta-bg-elevated);
+    border: 1px solid var(--tacta-border);
+    border-radius: var(--tacta-radius-md);
+}
+
+.tacta-record-object .tacta-record-object-stat-count {
+    font-size: var(--tacta-font-size-xl);
+    font-weight: 700;
+    color: var(--tacta-accent);
+    line-height: 1;
+}
+
+.tacta-record-object .tacta-record-object-stat-label {
+    font-size: var(--tacta-font-size-xs);
+    color: var(--tacta-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   JSON TREE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-tree {
+    font-family: var(--tacta-font-mono);
+    font-size: var(--tacta-font-size-sm);
+    line-height: 1.6;
+}
+
+/* ── Node Wrapper ── */
+
+.tacta-record-object .tacta-record-object-node {
+    /* Provides left indentation via inline paddingLeft */
+}
+
+/* ── Row (shared) ── */
+
+.tacta-record-object .tacta-record-object-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--tacta-space-xs);
+    padding: var(--tacta-space-xxs) var(--tacta-space-xs);
+    border-radius: var(--tacta-radius-sm);
+    transition: background var(--tacta-transition-fast);
+    min-height: 24px;
+}
+
+.tacta-record-object .tacta-record-object-row:hover {
+    background: var(--tacta-bg-hover);
+}
+
+/* ── Collapsible Row ── */
+
+.tacta-record-object .tacta-record-object-row--collapsible {
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+}
+
+.tacta-record-object .tacta-record-object-row--collapsible:hover {
+    background: var(--tacta-bg-hover);
+}
+
+/* ── Leaf Row (click to copy) ── */
+
+.tacta-record-object .tacta-record-object-row--leaf {
+    cursor: pointer;
+}
+
+.tacta-record-object .tacta-record-object-row--leaf:active {
+    background: var(--tacta-accent-muted);
+}
+
+/* ── Copied feedback ── */
+
+.tacta-record-object .tacta-record-object-row--copied {
+    background: var(--tacta-success-bg) !important;
+    transition: background 0ms;
+}
+
+/* ── Arrow Toggle ── */
+
+.tacta-record-object .tacta-record-object-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+    color: var(--tacta-text-muted);
+    flex-shrink: 0;
+    transition: transform var(--tacta-transition-fast),
+                color var(--tacta-transition-fast);
+    transform: rotate(0deg);
+}
+
+.tacta-record-object .tacta-record-object-arrow--open {
+    transform: rotate(90deg);
+    color: var(--tacta-accent);
+}
+
+/* ── Key Name ── */
+
+.tacta-record-object .tacta-record-object-key {
+    color: var(--tacta-accent);
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Colon Separator ── */
+
+.tacta-record-object .tacta-record-object-colon {
+    color: var(--tacta-text-muted);
+    flex-shrink: 0;
+    margin: 0 var(--tacta-space-xxs);
+}
+
+/* ── Type Label (for collapsible headers) ── */
+
+.tacta-record-object .tacta-record-object-type-label {
+    font-size: var(--tacta-font-size-xs);
+    font-weight: 400;
+    color: var(--tacta-text-muted);
+    font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   VALUE TYPES (color coded)
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-value {
+    word-break: break-all;
+    min-width: 0;
+}
+
+/* String values: light green */
+.tacta-record-object .tacta-record-object-value--string {
+    color: #a8d88a;
+}
+
+/* Numeric values: orange */
+.tacta-record-object .tacta-record-object-value--number {
+    color: var(--tacta-warning);
+}
+
+/* Boolean values: blue */
+.tacta-record-object .tacta-record-object-value--boolean {
+    color: var(--tacta-info);
+}
+
+/* Null values: dimmed gray */
+.tacta-record-object .tacta-record-object-value--null {
+    color: var(--tacta-text-muted);
+    font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   COLLAPSIBLE CHILDREN
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-children {
+    border-left: 1px solid var(--tacta-border);
+    margin-left: 8px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SEARCH HIGHLIGHT
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-highlight {
+    background: rgba(243, 156, 18, 0.35);
+    color: var(--tacta-text);
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+}
+
+.tacta-record-object .tacta-record-object-loading-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-muted);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ERROR STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tacta-space-md);
+    padding: var(--tacta-space-xxxl) var(--tacta-space-lg);
+    text-align: center;
+}
+
+.tacta-record-object .tacta-record-object-error-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--tacta-error-bg);
+    color: var(--tacta-error);
+    font-size: var(--tacta-font-size-xl);
+    font-weight: 700;
+}
+
+.tacta-record-object .tacta-record-object-error-text {
+    font-size: var(--tacta-font-size-sm);
+    color: var(--tacta-text-secondary);
+    max-width: 340px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   EMPTY STATE
+   ════════════════════════════════════════════════════════════════════ */
+
+.tacta-record-object .tacta-record-object-empty {
+    text-align: center;
+    padding: var(--tacta-space-xl);
+    color: var(--tacta-text-muted);
+    font-size: var(--tacta-font-size-sm);
+    font-family: var(--tacta-font-family);
+}
